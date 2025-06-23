@@ -127,17 +127,18 @@
         }
 
         /* --- ✨ 課程導覽列 & 測驗區塊 --- */
-        .lesson-nav, .quiz-section {
+        .lesson-nav, .quiz-section, .full-text-section {
             background-color: #e8e6d9;
-            padding: 1em;
+            padding: 1.5em;
             border-radius: 12px;
             margin: 1.5em 0;
         }
-        .lesson-nav h3, .quiz-section h3 {
+        .lesson-nav h3, .quiz-section h3, .full-text-section h3 {
             margin-top: 0;
             color: #305030;
             border-bottom: 2px solid #c9c7b9;
             padding-bottom: 0.5em;
+            margin-bottom: 1em;
         }
         .lesson-links {
             display: flex;
@@ -189,6 +190,16 @@
             font-size: 1.2em;
             padding: 12px 28px;
         }
+        
+        /* ✨ 課文總覽 */
+        .full-text-section .overview-container {
+            position: relative;
+        }
+        .full-text-section img {
+            max-width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
 
 
         /* --- 新版文字與按鈕佈局 --- */
@@ -198,7 +209,7 @@
             border-radius: 12px;
             padding: 2em;
             text-align: left;
-            margin-top: 1em;
+            margin-top: 1.5em;
         }
 
         .sentence-line {
@@ -219,7 +230,7 @@
             align-items: center;
         }
 
-        .image-play-btn, .gemini-btn {
+        .play-btn, .gemini-btn {
             background-color: rgba(0, 0, 0, 0.05);
             border: 1px solid #ccc;
             cursor: pointer;
@@ -231,10 +242,10 @@
             transition: background-color 0.2s;
         }
         
-        .image-play-btn { width: 40px; height: 40px; }
+        .play-btn { width: 40px; height: 40px; }
         .gemini-btn { width: 32px; height: 32px; font-size: 0.9em; }
 
-        .image-play-btn:hover, .gemini-btn:hover {
+        .play-btn:hover, .gemini-btn:hover {
             background-color: #e9e9e9;
         }
 
@@ -339,6 +350,7 @@
                 <div class="header-left">
                      <button id="back-btn">↩️</button>
                     <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1750667116/ChatGPT_Image_2025%E5%B9%B46%E6%9C%886%E6%97%A5_%E4%B8%8B%E5%8D%8803_49_10_g50dif.png" alt="臺東縣本土語教學 Logo" class="logo">
+                    <p class="instructor-name">臺東縣本土語團</p>
                 </div>
                 <div class="header-right">
                     <p class="instructor-name">授課教師：蘿拉麻吉 Rolla Moggi</p>
@@ -348,7 +360,7 @@
 
             <div class="title-container">
                 <h1>Rayray no Kiloma’an</h1>
-                <button class="image-play-btn" data-audio="audio-title"><span class="play-icon"></span></button>
+                <button class="play-btn" data-audio="audio-title"><span class="play-icon"></span></button>
             </div>
             <h2>📖 豐年祭的程序｜課文朗讀練習</h2>
 
@@ -371,11 +383,19 @@
                 </ul>
             </nav>
 
+            <!-- ✨ 課文總覽區塊 -->
+            <section class="full-text-section">
+                <h3>課文總覽</h3>
+                <div class="overview-container" style="position: relative;">
+                    <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1750658706/lesson_text_fxfgbh.png" alt="課文全文圖片">
+                </div>
+            </section>
+
             <div class="lesson-content">
                 <!-- 句子 1 -->
                 <div class="sentence-line">
                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-1"><span class="play-icon"></span></button>
+                        <button class="play-btn" data-audio="audio-1"><span class="play-icon"></span></button>
                         <button class="gemini-btn" data-text="Faloay ko romi'ad to kiloma’an no Farangaw.">📖</button>
                     </div>
                     <p class="sentence-text">
@@ -385,7 +405,7 @@
                 <!-- 句子 2 -->
                 <div class="sentence-line">
                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-2"><span class="play-icon"></span></button>
+                        <button class="play-btn" data-audio="audio-2"><span class="play-icon"></span></button>
                         <button class="gemini-btn" data-text="Sa'ayaw a romi'ad misahafay, mirekal i taliyok no niyaro', milikakawa to lalosidan.">📖</button>
                     </div>
                     <p class="sentence-text">
@@ -395,7 +415,7 @@
                 <!-- 句子 3 -->
                 <div class="sentence-line">
                      <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-3"><span class="play-icon"></span></button>
+                        <button class="play-btn" data-audio="audio-3"><span class="play-icon"></span></button>
                         <button class="gemini-btn" data-text="Sakatosa a romi'ad panemnem, tahidang to liteng misatora, pacaedong to mirormomay, mitaowak to kaetohay.">📖</button>
                     </div>
                     <p class="sentence-text">
@@ -405,7 +425,7 @@
                 <!-- 句子 4 -->
                 <div class="sentence-line">
                      <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-4"><span class="play-icon"></span></button>
+                        <button class="play-btn" data-audio="audio-4"><span class="play-icon"></span></button>
                         <button class="gemini-btn" data-text="Sakatolo a romi'ad, pafata'an pacelem na malingad talariyal mikesi'.">📖</button>
                     </div>
                     <p class="sentence-text">
@@ -415,7 +435,7 @@
                 <!-- 句子 5 -->
                 <div class="sentence-line">
                      <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-5"><span class="play-icon"></span></button>
+                        <button class="play-btn" data-audio="audio-5"><span class="play-icon"></span></button>
                         <button class="gemini-btn" data-text="Sakaseepat ato sakalima a romi'ad, saromi'ad mikesi' i riyal, micelem micekiw mipacing ko kapah, ta palaylay minokay.">📖</button>
                     </div>
                     <p class="sentence-text">
@@ -425,7 +445,7 @@
                 <!-- 句子 6 -->
                 <div class="sentence-line">
                      <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-6"><span class="play-icon"></span></button>
+                        <button class="play-btn" data-audio="audio-6"><span class="play-icon"></span></button>
                         <button class="gemini-btn" data-text="Sakaenem a romi'ad misahemay, malikoda ko kapah, patayra i sefi to faes ko fafahiyan, palilam to titi.">📖</button>
                     </div>
                     <p class="sentence-text">
@@ -435,7 +455,7 @@
                 <!-- 句子 7 -->
                 <div class="sentence-line">
                      <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-7"><span class="play-icon"></span></button>
+                        <button class="play-btn" data-audio="audio-7"><span class="play-icon"></span></button>
                         <button class="gemini-btn" data-text="Sakapito a romi'ad pipipay, mapolong ko finawlan maaides masakero ato malalefod, horirek panokay to liteng.">📖</button>
                     </div>
                     <p class="sentence-text">
@@ -445,7 +465,7 @@
                 <!-- 句子 8 -->
                 <div class="sentence-line">
                      <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-8"><span class="play-icon"></span></button>
+                        <button class="play-btn" data-audio="audio-8"><span class="play-icon"></span></button>
                         <button class="gemini-btn" data-text="Saikoray a romi'ad mipakerang ko kapot.">📖</button>
                     </div>
                     <p class="sentence-text">
@@ -454,7 +474,7 @@
                 </div>
             </div>
     
-            <!-- ✨ 線上測驗區塊 (已更新) -->
+            <!-- ✨ 線上測驗區塊 -->
             <section class="quiz-section">
                 <h3>第一堂課：立即全班測驗</h3>
                 <div class="quiz-content">
@@ -472,16 +492,16 @@
         </div>
     </main>
 
-    <!-- 隱藏的音訊播放器 (已重新對應) -->
-    <audio id="audio-title" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657545/%E8%AA%B2%E6%96%87rayray_no_kiloma_an_k7hpsw.mp3"></audio> <!-- line1 -->
-    <audio id="audio-1" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657974/line2_gti8hy.mp3"></audio> <!-- line2 -->
-    <audio id="audio-2" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658020/line3_blpsw6.mp3"></audio> <!-- line3 -->
-    <audio id="audio-3" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658115/line4_ngh0nr.mp3"></audio> <!-- line4 -->
-    <audio id="audio-4" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658179/line5_omltw4.mp3"></audio> <!-- line5 -->
-    <audio id="audio-5" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658270/line6_pf2hef.mp3"></audio> <!-- line6 -->
-    <audio id="audio-6" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658330/line7_fg4jqm.mp3"></audio> <!-- line7 -->
-    <audio id="audio-7" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658390/line8_qkssrh.mp3"></audio> <!-- line8 -->
-    <audio id="audio-8" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658429/line9_txq625.mp3"></audio> <!-- line9 -->
+    <!-- 隱藏的音訊播放器等 -->
+    <audio id="audio-title" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657545/%E8%AA%B2%E6%96%87rayray_no_kiloma_an_k7hpsw.mp3"></audio>
+    <audio id="audio-1" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657974/line2_gti8hy.mp3"></audio>
+    <audio id="audio-2" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658020/line3_blpsw6.mp3"></audio>
+    <audio id="audio-3" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658115/line4_ngh0nr.mp3"></audio>
+    <audio id="audio-4" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658179/line5_omltw4.mp3"></audio>
+    <audio id="audio-5" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658270/line6_pf2hef.mp3"></audio>
+    <audio id="audio-6" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658330/line7_fg4jqm.mp3"></audio>
+    <audio id="audio-7" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658390/line8_qkssrh.mp3"></audio>
+    <audio id="audio-8" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658429/line9_txq625.mp3"></audio>
 
     <!-- 翻譯提示框 -->
     <div id="tooltip"></div>
@@ -489,9 +509,9 @@
     <!-- Modal 彈出視窗 -->
     <div id="gemini-modal" class="modal-overlay">
         <div class="modal-content">
-            <span id="modal-close-btn" class="modal-close">&times;</span>
-            <h3 id="modal-title" class="modal-title">AI 小老師</h3>
-            <div id="modal-body"><div class="loader"></div></div>
+            <span class="modal-close">&times;</span>
+            <h3 class="modal-title">AI 小老師</h3>
+            <div class="modal-body"><div class="loader"></div></div>
         </div>
     </div>
 
@@ -557,14 +577,14 @@
                 "Saikoray_a_romi'ad": "最後一天", "mipakerang_ko_kapot": "年齡階層進行完工祭"
             };
 
-            const allPlayButtons = document.querySelectorAll('.image-play-btn');
+            const allPlayButtons = document.querySelectorAll('.play-btn');
             const allPlayers = document.querySelectorAll('.audio-player');
             const geminiExplainButtons = document.querySelectorAll('.gemini-btn');
             const cultureBtn = document.getElementById('culture-btn');
-            const modal = document.getElementById('gemini-modal');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-            const modalTitle = document.getElementById('modal-title');
-            const modalBody = document.getElementById('modal-body');
+            const geminiModal = document.getElementById('gemini-modal');
+            const modalCloseBtn = geminiModal.querySelector('.modal-close');
+            const modalTitle = geminiModal.querySelector('.modal-title');
+            const modalBody = geminiModal.querySelector('.modal-body');
             const tooltip = document.getElementById('tooltip');
 
             // --- ✨ 點字翻譯邏輯 ---
@@ -598,18 +618,15 @@
 
                     const isCurrentlyPlaying = !targetPlayer.paused;
 
-                    if (!isCurrentlyPlaying) {
+                    if (isCurrentlyPlaying) {
+                        targetPlayer.pause();
+                    } else {
                         allPlayers.forEach(p => {
                             if (p !== targetPlayer) {
                                 p.pause();
                                 p.currentTime = 0;
                             }
                         });
-                    }
-
-                    if (isCurrentlyPlaying) {
-                        targetPlayer.pause();
-                    } else {
                         targetPlayer.play().catch(err => {
                             if (err.name !== 'AbortError') {
                                 console.error("播放錯誤:", err);
@@ -627,7 +644,7 @@
                     }
                 });
 
-                player.addEventListener('pause', () => { // This covers both pause and ended
+                player.addEventListener('pause', () => { // This covers both pause() and ended
                     const btn = document.querySelector(`[data-audio="${player.id}"]`);
                     if (btn && btn.querySelector('span')) {
                         btn.querySelector('span').className = 'play-icon';
@@ -636,9 +653,8 @@
             });
             
             // --- Gemini API 呼叫邏輯 ---
-            const callGemini = async (prompt) => {
-                modalBody.innerHTML = '<div class="loader"></div>';
-                modal.style.display = 'flex';
+            const callGemini = async (prompt, modalBodyElement) => {
+                modalBodyElement.innerHTML = '<div class="loader"></div>';
 
                 const apiKey = ""; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
@@ -654,21 +670,43 @@
                     if (!response.ok) throw new Error(`API 請求失敗，狀態碼: ${response.status}`);
                     const result = await response.json();
                     if (result.candidates && result.candidates[0].content.parts[0].text) {
-                        modalBody.innerHTML = result.candidates[0].content.parts[0].text.replace(/\n/g, '<br>');
+                        return result.candidates[0].content.parts[0].text;
                     } else {
                         throw new Error('從 API 收到的回應格式不正確。');
                     }
                 } catch (error) {
                     console.error('Gemini API 呼叫失敗:', error);
-                    modalBody.innerHTML = `發生錯誤，請稍後再試。<br>(${error.message})`;
+                    return `發生錯誤，請稍後再試。<br>(${error.message})`;
                 }
             };
+            
+            // --- Modal 通用邏輯 ---
+             const setupModal = (modalElement, openBtn) => {
+                const closeBtn = modalElement.querySelector('.modal-close');
+                
+                if (openBtn) {
+                    openBtn.addEventListener('click', () => {
+                       modalElement.style.display = 'flex';
+                    });
+                }
+                
+                closeBtn.addEventListener('click', () => modalElement.style.display = 'none');
+                modalElement.addEventListener('click', (e) => {
+                    if (e.target === modalElement) {
+                        modalElement.style.display = 'none';
+                    }
+                });
+            };
 
+            setupModal(geminiModal);
+           
+
+            // --- 逐句詳解 & 文化探索邏輯 ---
             geminiExplainButtons.forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', async () => {
                     const sentence = button.dataset.text;
                     modalTitle.innerText = '📖 逐句詳解';
-                    // 優化後的 prompt，整合了您提供的正確資訊
+                    geminiModal.style.display = 'flex';
                     const prompt = `請根據以下提供的「正確單字定義」，將這句阿美語翻譯成繁體中文，並用條列式詳細解釋其中的文法結構與單字。請以初學者容易理解的方式說明。
 
 **正確單字定義:**
@@ -719,25 +757,20 @@
 **文法結構：**
 * [文法點1]：[解釋1]
 * [文法點2]：[解釋2]`;
-                    callGemini(prompt);
+                    const responseText = await callGemini(prompt, modalBody);
+                    modalBody.innerHTML = responseText.replace(/\n/g, '<br>');
                 });
             });
 
-            cultureBtn.addEventListener('click', () => {
+            cultureBtn.addEventListener('click', async () => {
                 modalTitle.innerText = '✨ 探索豐年祭文化';
+                geminiModal.style.display = 'flex';
                 const fullText = Array.from(document.querySelectorAll('.gemini-btn')).map(btn => btn.dataset.text).join('\n');
                 const prompt = `我正在學習關於台灣阿美族豐年祭 (Kiloma'an) 的一篇阿美語課文。請以一個對文化感興趣的語言學習者的角度，用繁體中文詳細介紹豐年祭的文化背景與重要性，並說明在這篇課文中提到的程序（例如：misahafay, panemnem, mikesi' 等）分別代表什麼文化意義。\n\n課文內容參考如下：\n${fullText}`;
-                callGemini(prompt);
+                const responseText = await callGemini(prompt, modalBody);
+                modalBody.innerHTML = responseText.replace(/\n/g, '<br>');
             });
-
-            const closeModal = () => {
-                modal.style.display = 'none';
-                modalBody.innerHTML = '';
-            };
-            modalCloseBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) { closeModal(); }
-            });
+            
         });
     </script>
 </body>
