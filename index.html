@@ -16,7 +16,8 @@
         .container { max-width: 800px; margin: auto; text-align: center; padding: 1em; /* 將 padding 移到 container */}
         
         /* --- ✨ 新增首頁動畫樣式 --- */
-        #splash-screen {
+        /* Updated IDs for clarity between splash screens */
+        #splash-screen-1, #splash-screen-2, #splash-screen-3 { /* Added splash-screen-3 */
             position: fixed;
             top: 0;
             left: 0;
@@ -29,7 +30,11 @@
             align-items: center;
             transition: opacity 0.8s ease-out;
         }
-        #splash-video {
+        #splash-screen-2, #splash-screen-3 { /* Initially hidden */
+            display: none; 
+        }
+
+        #splash-video-1, #splash-video-2, #splash-video-3 { /* Added splash-video-3 */
             position: absolute;
             top: 50%;
             left: 50%;
@@ -38,7 +43,8 @@
             object-fit: contain; /* 確保影片完整顯示，不裁切 */
             transform: translate(-50%, -50%);
         }
-        #enter-btn {
+
+        #enter-btn-1, #enter-btn-2, #enter-btn-3 { /* Added enter-btn-3 */
             position: relative;
             z-index: 2001;
             padding: 15px 35px;
@@ -50,13 +56,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        #enter-btn:hover {
+        #enter-btn-1:hover, #enter-btn-2:hover, #enter-btn-3:hover { /* Added enter-btn-3 hover */
             background-color: rgba(48, 80, 48, 0.9);
             transform: scale(1.05);
         }
         
         /* ✨ 聲音控制按鈕 */
-        #volume-btn {
+        #volume-btn-1, #volume-btn-2, #volume-btn-3 { /* Added volume-btn-3 */
             position: absolute;
             bottom: 20px;
             right: 20px;
@@ -74,6 +80,23 @@
             align-items: center;
         }
         
+        /* New back buttons for splash screens */
+        #back-btn-2, #back-btn-3 { /* Added back-btn-3 */
+            position: absolute;
+            top: 20px; 
+            left: 20px; 
+            z-index: 2001;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white; 
+            padding: 5px 10px;
+        }
+        #back-btn-2:hover, #back-btn-3:hover { /* Added back-btn-3 hover */
+            color: #ccc;
+        }
+
         #main-content {
             display: none; /* 預設隱藏主內容 */
             opacity: 0;
@@ -127,17 +150,18 @@
         }
 
         /* --- ✨ 課程導覽列 & 測驗區塊 --- */
-        .lesson-nav, .quiz-section {
+        .lesson-nav, .quiz-section, .full-text-section {
             background-color: #e8e6d9;
-            padding: 1em;
+            padding: 1.5em;
             border-radius: 12px;
             margin: 1.5em 0;
         }
-        .lesson-nav h3, .quiz-section h3 {
+        .lesson-nav h3, .quiz-section h3, .full-text-section h3 {
             margin-top: 0;
             color: #305030;
             border-bottom: 2px solid #c9c7b9;
             padding-bottom: 0.5em;
+            margin-bottom: 1em;
         }
         .lesson-links {
             display: flex;
@@ -189,6 +213,47 @@
             font-size: 1.2em;
             padding: 12px 28px;
         }
+        
+        /* ✨ 課文總覽 */
+        .full-text-section .overview-container {
+            position: relative;
+        }
+        .full-text-section img {
+            max-width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .overview-play-btn {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.05); /* Adjusted to match other play buttons */
+            border: 1px solid #ccc; /* Adjusted to match other play buttons */
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s;
+            width: 40px; /* Matched size with .play-btn */
+            height: 40px; /* Matched size with .play-btn */
+            font-size: 1.5em; /* Matched font size with .play-btn */
+        }
+        .overview-play-btn:hover {
+            background-color: #e9e9e9; /* Adjusted to match other play buttons */
+        }
+
+        /* Positions for overview buttons */
+        /* These positions are now fine-tuned for better alignment with the image text and below yellow symbols */
+        #overview-btn-title { top: 7.0%; left: 3.5%; } 
+        #overview-btn-1 { top: 17.0%; left: 3.5%; } 
+        #overview-btn-2 { top: 26.0%; left: 3.5%; } 
+        #overview-btn-3 { top: 34.8%; left: 3.5%; } 
+        #overview-btn-4 { top: 46.8%; left: 3.5%; } 
+        #overview-btn-5 { top: 56.1%; left: 3.5%; } 
+        #overview-btn-6 { top: 68.5%; left: 3.5%; } 
+        #overview-btn-7 { top: 77.3%; left: 3.5%; } 
+        #overview-btn-8 { top: 86.0%; left: 3.5%; } 
 
 
         /* --- 新版文字與按鈕佈局 --- */
@@ -198,7 +263,7 @@
             border-radius: 12px;
             padding: 2em;
             text-align: left;
-            margin-top: 1em;
+            margin-top: 1.5em;
         }
 
         .sentence-line {
@@ -219,7 +284,7 @@
             align-items: center;
         }
 
-        .image-play-btn, .gemini-btn {
+        .play-btn, .gemini-btn {
             background-color: rgba(0, 0, 0, 0.05);
             border: 1px solid #ccc;
             cursor: pointer;
@@ -229,17 +294,15 @@
             align-items: center;
             justify-content: center;
             transition: background-color 0.2s;
+            font-family: "Times New Roman", sans-serif; /* Ensure icon characters display */
         }
         
-        .image-play-btn { width: 40px; height: 40px; }
+        .play-btn { width: 40px; height: 40px; font-size: 1.5em; }
         .gemini-btn { width: 32px; height: 32px; font-size: 0.9em; }
 
-        .image-play-btn:hover, .gemini-btn:hover {
+        .play-btn:hover, .gemini-btn:hover {
             background-color: #e9e9e9;
         }
-
-        .play-icon::before { content: '▶'; }
-        .pause-icon::before { content: '❚❚'; font-size: 0.8em; }
 
         .sentence-text {
             flex-grow: 1;
@@ -257,6 +320,14 @@
         }
         .word:hover {
             background-color: #e8f4f8;
+        }
+        .word.highlighted-phrase { /* New style for highlighted phrase (red) */
+            background-color: #ffcccc; /* Light red background */
+            font-weight: bold;
+        }
+        .word.highlighted-single-word { /* New style for highlighted single word (blue) */
+            background-color: #cceeff; /* Light blue background */
+            font-weight: bold;
         }
 
         /* 翻譯提示框 */
@@ -309,27 +380,62 @@
             animation: spin 1s linear infinite; margin: auto;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
+
+        /* AI Chat Modal styles removed */
+
         /* 響應式調整 */
         @media (max-width: 600px) {
             .page-header {
                 justify-content: space-between;
             }
-             .header-info {
+            .header-info {
                 gap: 10px;
+            }
+            .sentence-text {
+                font-size: 1.2em; /* Smaller font size for mobile */
+            }
+            /* Adjusted for consistency on mobile */
+            .play-btn { width: 35px; height: 35px; font-size: 1.3em;}
+            .gemini-btn { width: 28px; height: 28px; font-size: 0.8em; }
+            .overview-play-btn { 
+                width: 35px; 
+                height: 35px; 
+                font-size: 1.3em;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ✨ 首頁動畫 -->
-    <div id="splash-screen">
-        <video id="splash-video" autoplay muted loop playsinline>
+    <!-- ✨ 首頁動畫 1 -->
+    <div id="splash-screen-1">
+        <video id="splash-video-1" autoplay muted loop playsinline>
             <source src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750665618/%E5%A4%A7%E5%AF%8C%E7%BF%81%E5%8B%95%E7%95%AB_fwbjxs.mp4" type="video/mp4">
             您的瀏覽器不支援影片播放。
         </video>
-        <button id="enter-btn">進入課程</button>
-        <button id="volume-btn">🔈</button>
+        <button id="enter-btn-1">進入課程</button>
+        <button id="volume-btn-1">🔈</button>
+    </div>
+
+    <!-- ✨ 首頁動畫 2 -->
+    <div id="splash-screen-2">
+        <video id="splash-video-2" muted loop playsinline>
+            <source src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750684378/kiloma_an_%E7%9A%84%E8%A4%87%E6%9C%AC_2_qjc4ix.mp4" type="video/mp4">
+            您的瀏覽器不支援影片播放。
+        </video>
+        <button id="enter-btn-2">進入課程</button>
+        <button id="volume-btn-2">🔈</button>
+        <button id="back-btn-2">↩️</button> <!-- New back button for splash screen 2 -->
+    </div>
+
+    <!-- ✨ 首頁動畫 3 (New) -->
+    <div id="splash-screen-3">
+        <video id="splash-video-3" muted loop playsinline>
+            <source src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750686700/kiloma_an_%E7%9A%84%E8%A4%87%E6%9C%AC_6_vvz732.mp4" type="video/mp4">
+            您的瀏覽器不支援影片播放。
+        </video>
+        <button id="enter-btn-3">進入課程</button>
+        <button id="volume-btn-3">🔈</button>
+        <button id="back-btn-3">↩️</button> <!-- New back button for splash screen 3 -->
     </div>
 
     <main id="main-content">
@@ -337,8 +443,9 @@
             
             <header class="page-header">
                 <div class="header-left">
-                     <button id="back-btn">↩️</button>
+                    <button id="back-btn">↩️</button>
                     <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1750667116/ChatGPT_Image_2025%E5%B9%B46%E6%9C%886%E6%97%A5_%E4%B8%8B%E5%8D%8803_49_10_g50dif.png" alt="臺東縣本土語教學 Logo" class="logo">
+                    <p class="instructor-name">臺東縣本土語團</p>
                 </div>
                 <div class="header-right">
                     <p class="instructor-name">授課教師：蘿拉麻吉 Rolla Moggi</p>
@@ -348,7 +455,7 @@
 
             <div class="title-container">
                 <h1>Rayray no Kiloma’an</h1>
-                <button class="image-play-btn" data-audio="audio-title"><span class="play-icon"></span></button>
+                <button class="play-btn" data-audio="audio-title">▶</button>
             </div>
             <h2>📖 豐年祭的程序｜課文朗讀練習</h2>
 
@@ -371,117 +478,134 @@
                 </ul>
             </nav>
 
+            <!-- ✨ 課文總覽區塊 -->
+            <section class="full-text-section">
+                <h3>課文總覽</h3>
+                <div class="overview-container">
+                    <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1750658706/lesson_text_fxfgbh.png" alt="課文全文圖片">
+                    <button class="play-btn overview-play-btn" data-audio="audio-title" id="overview-btn-title">▶</button>
+                    <button class="play-btn overview-play-btn" data-audio="audio-1" id="overview-btn-1">▶</button>
+                    <button class="play-btn overview-play-btn" data-audio="audio-2" id="overview-btn-2">▶</button>
+                    <button class="play-btn overview-play-btn" data-audio="audio-3" id="overview-btn-3">▶</button>
+                    <button class="play-btn overview-play-btn" data-audio="audio-4" id="overview-btn-4">▶</button>
+                    <button class="play-btn overview-play-btn" data-audio="audio-5" id="overview-btn-5">▶</button>
+                    <button class="play-btn overview-play-btn" data-audio="audio-6" id="overview-btn-6">▶</button>
+                    <button class="play-btn overview-play-btn" data-audio="audio-7" id="overview-btn-7">▶</button>
+                    <button class="play-btn overview-play-btn" data-audio="audio-8" id="overview-btn-8">▶</button>
+                </div>
+            </section>
+
             <div class="lesson-content">
-                <!-- 句子 1 -->
+                <!-- 句子內容 -->
                 <div class="sentence-line">
                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-1"><span class="play-icon"></span></button>
-                        <button class="gemini-btn" data-text="Faloay ko romi'ad to kiloma’an no Farangaw.">📖</button>
+                        <button class="play-btn" data-audio="audio-title">▶</button>
+                        <button class="gemini-btn" data-text="Rayray no Kiloma’an.">💡</button>
                     </div>
                     <p class="sentence-text">
-                        <span class="word" data-key="Faloay">Faloay</span> <span class="word" data-key="ko">ko</span> <span class="word" data-key="romi'ad">romi'ad</span> <span class="word" data-key="to">to</span> <span class="word" data-key="kiloma’an">kiloma’an</span> <span class="word" data-key="no">no</span> <span class="word" data-key="Farangaw">Farangaw</span>.
+                        Rayray no Kiloma’an.
                     </p>
                 </div>
-                <!-- 句子 2 -->
                 <div class="sentence-line">
                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-2"><span class="play-icon"></span></button>
-                        <button class="gemini-btn" data-text="Sa'ayaw a romi'ad misahafay, mirekal i taliyok no niyaro', milikakawa to lalosidan.">📖</button>
+                        <button class="play-btn" data-audio="audio-1">▶</button>
+                        <button class="gemini-btn" data-text="Faloay ko romi'ad to kiloma’an no Farangaw.">💡</button>
                     </div>
                     <p class="sentence-text">
-                        <span class="word" data-key="Sa'ayaw_a_romi'ad">Sa'ayaw a romi'ad</span> <span class="word" data-key="misahafay">misahafay</span>, <span class="word" data-key="mirekal">mirekal</span> <span class="word" data-key="i">i</span> <span class="word" data-key="taliyok_no_niyaro'">taliyok no niyaro'</span>, <span class="word" data-key="milikakawa">milikakawa</span> <span class="word" data-key="to_lalosidan">to lalosidan</span>.
+                        Faloay ko romi'ad to kiloma’an no Farangaw.
                     </p>
                 </div>
-                <!-- 句子 3 -->
                 <div class="sentence-line">
-                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-3"><span class="play-icon"></span></button>
-                        <button class="gemini-btn" data-text="Sakatosa a romi'ad panemnem, tahidang to liteng misatora, pacaedong to mirormomay, mitaowak to kaetohay.">📖</button>
+                    <div class="button-group">
+                        <button class="play-btn" data-audio="audio-2">▶</button>
+                        <button class="gemini-btn" data-text="Sa'ayaw a romi'ad misahafay, mirekal i taliyok no niyaro', milikakawa to lalosidan.">💡</button>
                     </div>
                     <p class="sentence-text">
-                        <span class="word" data-key="Sakatosa_a_romi'ad">Sakatosa a romi'ad</span> <span class="word" data-key="panemnem">panemnem</span>, <span class="word" data-key="tahidang_to_liteng">tahidang to liteng</span> <span class="word" data-key="misatora">misatora</span>, <span class="word" data-key="pacaedong_to_miromromay">pacaedong to mirormomay</span>, <span class="word" data-key="mitaowak_to_kaetohay">mitaowak to kaetohay</span>.
+                        Sa'ayaw a romi'ad misahafay, mirekal i taliyok no niyaro', milikakawa to lalosidan.
                     </p>
                 </div>
-                <!-- 句子 4 -->
                 <div class="sentence-line">
-                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-4"><span class="play-icon"></span></button>
-                        <button class="gemini-btn" data-text="Sakatolo a romi'ad, pafata'an pacelem na malingad talariyal mikesi'.">📖</button>
+                    <div class="button-group">
+                        <button class="play-btn" data-audio="audio-3">▶</button>
+                        <button class="gemini-btn" data-text="Sakatosa a romi'ad panemnem, tahidang to liteng misatora, pacaedong to miromromay, mitaowak to kaetohay.">💡</button>
                     </div>
                     <p class="sentence-text">
-                        <span class="word" data-key="Sakatolo_a_romi'ad">Sakatolo a romi'ad</span>, <span class="word" data-key="pafata'an_pacelem">pafata'an pacelem</span> <span class="word" data-key="na_malingad_talariyal_mikesi'">na malingad talariyal mikesi'</span>.
+                        Sakatosa a romi'ad panemnem, tahidang to liteng misatora, pacaedong to miromromay, mitaowak to kaetohay.
                     </p>
                 </div>
-                <!-- 句子 5 -->
                 <div class="sentence-line">
-                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-5"><span class="play-icon"></span></button>
-                        <button class="gemini-btn" data-text="Sakaseepat ato sakalima a romi'ad, saromi'ad mikesi' i riyal, micelem micekiw mipacing ko kapah, ta palaylay minokay.">📖</button>
+                    <div class="button-group">
+                        <button class="play-btn" data-audio="audio-4">▶</button>
+                        <button class="gemini-btn" data-text="Sakatolo a romi'ad, pafata'an pacelem na malingad talariyal mikesi'.">💡</button>
                     </div>
                     <p class="sentence-text">
-                        <span class="word" data-key="Sakaseepat_ato_sakalima_a_romi'ad">Sakaseepat ato sakalima a romi'ad</span>, <span class="word" data-key="saromi'ad_mikesi'_i_riyal">saromi'ad mikesi' i riyal</span>, <span class="word" data-key="micelem">micelem</span> <span class="word" data-key="micekiw">micekiw</span> <span class="word" data-key="mipacing_ko_kapah">mipacing ko kapah</span>, <span class="word" data-key="ta_palaylay_minokay">ta palaylay minokay</span>.
+                        Sakatolo a romi'ad, pafata'an pacelem na malingad talariyal mikesi'.
                     </p>
                 </div>
-                <!-- 句子 6 -->
                 <div class="sentence-line">
-                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-6"><span class="play-icon"></span></button>
-                        <button class="gemini-btn" data-text="Sakaenem a romi'ad misahemay, malikoda ko kapah, patayra i sefi to faes ko fafahiyan, palilam to titi.">📖</button>
+                    <div class="button-group">
+                        <button class="play-btn" data-audio="audio-5">▶</button>
+                        <button class="gemini-btn" data-text="Sakasepat ato sakalima a romi'ad, saromi'ad mikesi' i riyal, micelem micekiw mipacing ko kapah, ta palaylay minokay.">💡</button>
                     </div>
                     <p class="sentence-text">
-                        <span class="word" data-key="Sakaenem_a_romi'ad">Sakaenem a romi'ad</span> <span class="word" data-key="misahemay">misahemay</span>, <span class="word" data-key="malikoda_ko_kapah">malikoda ko kapah</span>, <span class="word" data-key="patayra_i_sefi_to_faes_ko_fafahiyan">patayra i sefi to faes ko fafahiyan</span>, <span class="word" data-key="palilam_to_titi">palilam to titi</span>.
+                        Sakasepat ato sakalima a romi'ad, saromi'ad mikesi' i riyal, micelem micekiw mipacing ko kapah, ta palaylay minokay.
                     </p>
                 </div>
-                <!-- 句子 7 -->
                 <div class="sentence-line">
-                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-7"><span class="play-icon"></span></button>
-                        <button class="gemini-btn" data-text="Sakapito a romi'ad pipipay, mapolong ko finawlan maaides masakero ato malalefod, horirek panokay to liteng.">📖</button>
+                    <div class="button-group">
+                        <button class="play-btn" data-audio="audio-6">▶</button>
+                        <button class="gemini-btn" data-text="Sakaenem a romi'ad misahemay, malikoda ko kapah, patayra i sefi to faes ko fafahiyan, palilam to titi.">💡</button>
                     </div>
                     <p class="sentence-text">
-                        <span class="word" data-key="Sakapito_a_romi'ad_pipipay">Sakapito a romi'ad pipipay</span>, <span class="word" data-key="mapolong_ko_finawlan_maaides">mapolong ko finawlan maaides</span> <span class="word" data-key="masakero">masakero</span> <span class="word" data-key="ato">ato</span> <span class="word" data-key="malalefod">malalefod</span>, <span class="word" data-key="horirek_panokay_to_liteng">horirek panokay to liteng</span>.
+                        Sakaenem a romi'ad misahemay, malikoda ko kapah, patayra i sefi to faes ko fafahiyan, palilam to titi.
                     </p>
                 </div>
-                <!-- 句子 8 -->
                 <div class="sentence-line">
-                     <div class="button-group">
-                        <button class="image-play-btn" data-audio="audio-8"><span class="play-icon"></span></button>
-                        <button class="gemini-btn" data-text="Saikoray a romi'ad mipakerang ko kapot.">📖</button>
+                    <div class="button-group">
+                        <button class="play-btn" data-audio="audio-7">▶</button>
+                        <button class="gemini-btn" data-text="Sakapito a romi'ad pipipay, mapolong ko finawlan maaides masakero ato malalefod, horirek panokay to liteng.">💡</button>
                     </div>
                     <p class="sentence-text">
-                        <span class="word" data-key="Saikoray_a_romi'ad">Saikoray a romi'ad</span> <span class="word" data-key="mipakerang_ko_kapot">mipakerang ko kapot</span>.
+                        Sakapito a romi'ad pipipay, mapolong ko finawlan maaides masakero ato malalefod, horirek panokay to liteng.
+                    </p>
+                </div>
+                <div class="sentence-line">
+                    <div class="button-group">
+                        <button class="play-btn" data-audio="audio-8">▶</button>
+                        <button class="gemini-btn" data-text="Saikoray a romi'ad mipakerang ko kapot.">💡</button>
+                    </div>
+                    <p class="sentence-text">
+                        Saikoray a romi'ad mipakerang ko kapot.
                     </p>
                 </div>
             </div>
-    
-            <!-- ✨ 線上測驗區塊 (已更新) -->
+            
+            <!-- ✨ 線上測驗區塊 -->
             <section class="quiz-section">
                 <h3>第一堂課：立即全班測驗</h3>
                 <div class="quiz-content">
                     <p>請點擊下方按鈕或掃描 QR Code 進入測驗</p>
-                    <div class="quiz-item">
-                        <a href="https://wayground.com/join?gc=339281" target="_blank" rel="noopener noreferrer">
-                            <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1750670292/%E7%AC%AC%E4%B8%80%E5%A0%82%E6%B8%AC%E9%A9%97.png" alt="第一堂課測驗 QR Code">
-                        </a>
-                    </div>
-                     <a href="https://wayground.com/join?gc=339281" class="quiz-btn" target="_blank" rel="noopener noreferrer">進入第一堂課測驗</a>
+                    <!-- Removed QR code image and link as per user request -->
+                    <a href="https://wayground.com/join?gc=339281" class="quiz-btn" target="_blank" rel="noopener noreferrer">進入第一堂課測驗</a>
                 </div>
             </section>
 
-            <button id="culture-btn" class="culture-btn">✨ 探索豐年祭文化</button>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 25px;">
+                <button id="culture-btn" class="culture-btn">✨ 探索豐年祭文化</button>
+            </div>
         </div>
     </main>
 
-    <!-- 隱藏的音訊播放器 (已重新對應) -->
-    <audio id="audio-title" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657545/%E8%AA%B2%E6%96%87rayray_no_kiloma_an_k7hpsw.mp3"></audio> <!-- line1 -->
-    <audio id="audio-1" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657974/line2_gti8hy.mp3"></audio> <!-- line2 -->
-    <audio id="audio-2" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658020/line3_blpsw6.mp3"></audio> <!-- line3 -->
-    <audio id="audio-3" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658115/line4_ngh0nr.mp3"></audio> <!-- line4 -->
-    <audio id="audio-4" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658179/line5_omltw4.mp3"></audio> <!-- line5 -->
-    <audio id="audio-5" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658270/line6_pf2hef.mp3"></audio> <!-- line6 -->
-    <audio id="audio-6" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658330/line7_fg4jqm.mp3"></audio> <!-- line7 -->
-    <audio id="audio-7" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658390/line8_qkssrh.mp3"></audio> <!-- line8 -->
-    <audio id="audio-8" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658429/line9_txq625.mp3"></audio> <!-- line9 -->
+    <!-- 隱藏的音訊播放器等 -->
+    <audio id="audio-title" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657545/%E8%AA%B2%E6%96%87rayray_no_kiloma_an_k7hpsw.mp3"></audio>
+    <audio id="audio-1" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657974/line2_gti8hy.mp3"></audio>
+    <audio id="audio-2" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658020/line3_blpsw6.mp3"></audio>
+    <audio id="audio-3" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658115/line4_ngh0nr.mp3"></audio>
+    <audio id="audio-4" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658179/line5_omltw4.mp3"></audio>
+    <audio id="audio-5" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658270/line6_pf2hef.mp3"></audio>
+    <audio id="audio-6" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658330/line7_fg4jqm.mp3"></audio>
+    <audio id="audio-7" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658390/line8_qkssrh.mp3"></audio>
+    <audio id="audio-8" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658429/line9_txq625.mp3"></audio>
 
     <!-- 翻譯提示框 -->
     <div id="tooltip"></div>
@@ -489,9 +613,9 @@
     <!-- Modal 彈出視窗 -->
     <div id="gemini-modal" class="modal-overlay">
         <div class="modal-content">
-            <span id="modal-close-btn" class="modal-close">&times;</span>
-            <h3 id="modal-title" class="modal-title">AI 小老師</h3>
-            <div id="modal-body"><div class="loader"></div></div>
+            <span class="modal-close">&times;</span>
+            <h3 class="modal-title">AI 小老師</h3>
+            <div id="modal-body"><div class="loader"></div></div> <!-- Changed to div with id="modal-body" -->
         </div>
     </div>
 
@@ -499,120 +623,308 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- ✨ 首頁動畫邏輯 (已更新，更穩定) ---
-            const splashScreen = document.getElementById('splash-screen');
-            const enterBtn = document.getElementById('enter-btn');
+            let currentScreen = 'splash1'; // 'splash1', 'splash2', 'splash3', 'main' (Added splash3)
+
+            const splashScreen1 = document.getElementById('splash-screen-1');
+            const splashVideo1 = document.getElementById('splash-video-1');
+            const enterBtn1 = document.getElementById('enter-btn-1');
+            const volumeBtn1 = document.getElementById('volume-btn-1');
+
+            const splashScreen2 = document.getElementById('splash-screen-2');
+            const splashVideo2 = document.getElementById('splash-video-2');
+            const enterBtn2 = document.getElementById('enter-btn-2');
+            const volumeBtn2 = document.getElementById('volume-btn-2');
+            const backBtn2 = document.getElementById('back-btn-2'); 
+
+            const splashScreen3 = document.getElementById('splash-screen-3'); // New splash screen 3
+            const splashVideo3 = document.getElementById('splash-video-3'); // New splash video 3
+            const enterBtn3 = document.getElementById('enter-btn-3'); // New enter button 3
+            const volumeBtn3 = document.getElementById('volume-btn-3'); // New volume button 3
+            const backBtn3 = document.getElementById('back-btn-3'); // New back button 3
+
             const mainContent = document.getElementById('main-content');
-            const volumeBtn = document.getElementById('volume-btn');
-            const splashVideo = document.getElementById('splash-video');
-            const backBtn = document.getElementById('back-btn');
+            const backBtn = document.getElementById('back-btn'); // Main content back button
 
-            const showMainContent = () => {
-                splashScreen.style.opacity = '0';
-                splashScreen.addEventListener('transitionend', () => {
-                    splashScreen.style.display = 'none';
-                    mainContent.style.display = 'block';
-                    void mainContent.offsetWidth; 
-                    mainContent.style.opacity = '1';
+            const transitionTo = (target) => {
+                let currentActiveScreen;
+                if (currentScreen === 'splash1') currentActiveScreen = splashScreen1;
+                else if (currentScreen === 'splash2') currentActiveScreen = splashScreen2;
+                else if (currentScreen === 'splash3') currentActiveScreen = splashScreen3; // Added splash3
+                else if (currentScreen === 'main') currentActiveScreen = mainContent;
+
+                // Pause current video if any
+                if (currentScreen === 'splash1' && !splashVideo1.paused) splashVideo1.pause();
+                if (currentScreen === 'splash2' && !splashVideo2.paused) splashVideo2.pause();
+                if (currentScreen === 'splash3' && !splashVideo3.paused) splashVideo3.pause(); // Added splash3
+
+                currentActiveScreen.style.opacity = '0';
+                currentActiveScreen.addEventListener('transitionend', function handler() {
+                    currentActiveScreen.style.display = 'none';
+                    currentActiveScreen.removeEventListener('transitionend', handler);
+
+                    let nextActiveScreen;
+                    if (target === 'splash1') {
+                        nextActiveScreen = splashScreen1;
+                        splashVideo1.currentTime = 0; // Rewind
+                        splashVideo1.play();
+                    } else if (target === 'splash2') {
+                        nextActiveScreen = splashScreen2;
+                        splashVideo2.currentTime = 0; // Rewind
+                        splashVideo2.play();
+                    } else if (target === 'splash3') { // Added splash3
+                        nextActiveScreen = splashScreen3;
+                        splashVideo3.currentTime = 0; // Rewind
+                        splashVideo3.play();
+                    } else if (target === 'main') {
+                        nextActiveScreen = mainContent;
+                    }
+
+                    nextActiveScreen.style.display = (target.startsWith('splash')) ? 'flex' : 'block'; // Adjusted display type
+                    void nextActiveScreen.offsetWidth; // Trigger reflow
+                    nextActiveScreen.style.opacity = '1';
+                    currentScreen = target;
                 }, { once: true });
             };
 
-            const showSplashScreen = () => {
-                mainContent.style.opacity = '0';
-                mainContent.addEventListener('transitionend', () => {
-                    mainContent.style.display = 'none';
-                    splashScreen.style.display = 'flex';
-                    void splashScreen.offsetWidth;
-                    splashScreen.style.opacity = '1';
-                }, { once: true });
-            };
+            enterBtn1.addEventListener('click', () => transitionTo('splash2'));
+            enterBtn2.addEventListener('click', () => transitionTo('splash3')); // Transition to splash3
+            enterBtn3.addEventListener('click', () => transitionTo('main')); // New enter button for splash3
 
-            enterBtn.addEventListener('click', showMainContent);
-            backBtn.addEventListener('click', showSplashScreen);
-
-            volumeBtn.addEventListener('click', () => {
-                splashVideo.muted = !splashVideo.muted;
-                volumeBtn.textContent = splashVideo.muted ? '🔈' : '🔊';
+            backBtn.addEventListener('click', () => { // Main content back button
+                if (currentScreen === 'main') {
+                    transitionTo('splash3'); // Back to splash3
+                } 
             });
+
+            backBtn2.addEventListener('click', () => { // Splash screen 2 back button
+                if (currentScreen === 'splash2') {
+                    transitionTo('splash1');
+                }
+            });
+
+            backBtn3.addEventListener('click', () => { // Splash screen 3 back button (New)
+                if (currentScreen === 'splash3') {
+                    transitionTo('splash2');
+                }
+            });
+
+
+            volumeBtn1.addEventListener('click', () => {
+                splashVideo1.muted = !splashVideo1.muted;
+                volumeBtn1.textContent = splashVideo1.muted ? '🔈' : '🔊';
+            });
+
+            volumeBtn2.addEventListener('click', () => {
+                splashVideo2.muted = !splashVideo2.muted;
+                volumeBtn2.textContent = splashVideo2.muted ? '🔈' : '🔊';
+            });
+
+            volumeBtn3.addEventListener('click', () => { // New volume button for splash3
+                splashVideo3.muted = !splashVideo3.muted;
+                volumeBtn3.textContent = splashVideo3.muted ? '🔈' : '🔊';
+            });
+
+            // Initial state: show splash screen 1
+            splashScreen1.style.display = 'flex';
+            splashVideo1.play();
 
 
             // --- ✨ 智慧詞典 (已更新) ---
             const vocabulary = {
-                "Faloay": "八 (數字)", "ko": "（主格標記）", "romi'ad": "天、日子",
-                "to": "（斜格）", "kiloma’an": "豐年祭", "no": "（屬格）",
-                "Farangaw": "馬蘭社", "Sa'ayaw_a_romi'ad": "第一天", "misahafay": "準備日",
-                "mirekal": "報訊", "i": "在...", "taliyok_no_niyaro'": "部落周圍",
-                "milikakawa": "準備器具", "to_lalosidan": "傳統器具",
+                "Rayray": "程序", 
+                "Faloay": "八 (數字)", 
+                "ko": "主格", 
+                "romi'ad": "天; 天氣", // Updated definition
+                "to": "斜格", 
+                "kiloma’an": "豐年祭", "no": "（屬格）",
+                "Farangaw": "馬蘭社", 
+                "Sa'ayaw": "最先", // Updated definition
+                "Sa'ayaw_a_romi'ad": "第一天", 
+                "misahafay": "準備日",
+                "mirekal": "報訊", 
+                "i": "在... (介繫詞)", 
+                "taliyok_no_niyaro'": "部落周圍",
+                "milikakawa": "準備器具/啟程", 
+                "lalosidan": "傳統器具",
                 "Sakatosa_a_romi'ad": "第二天", "panemnem": "給泉水", "tahidang_to_liteng": "迎請祖靈",
                 "misatora": "祈靈", "pacaedong_to_miromromay": "青年領導接受交任務",
                 "mitaowak_to_kaetohay": "飲盡蒸餾酒", "Sakatolo_a_romi'ad": "第三天",
-                "pafata'an_pacelem": "一早清點人數", "na_malingad_talariyal_mikesi'": "才出發到海邊舉行海祭",
-                "Sakaseepat_ato_sakalima_a_romi'ad": "第四、五天", "saromi'ad_mikesi'_i_riyal": "青年整天在海邊",
+                "pafata'an_pacelem": "一早清點人數", 
+                "na_malingad_talariyal_mikesi'": "才出發到海邊舉行海祭", 
+                "Sakasepat_ato_sakalima_a_romi'ad": "第四、五天", 
+                "saromi_ad_mikesi'_i_riyal": "青年整天在海邊",
                 "micelem": "潛水", "micekiw": "採集螺貝類", "mipacing_ko_kapah": "青年射魚",
-                "ta_palaylay_minokay": "才從海邊跳勇士舞回到聚會所", "Sakaenem_a_romi'ad": "第六天",
+                "ta_palaylay_minokay": "才從海邊跳勇士舞回到聚會所", 
+                "palaylay": "勇士舞", // New definition
+                "minokay": "回家", // New definition
+                "Sakaenem_a_romi'ad": "第六天",
                 "misahemay": "搗杵造飯(製作糯米飯)", "malikoda_ko_kapah": "青年大會舞",
-                "patayra_i_sefi_to_faes_ko_fafahiyan": "女性使帶米去在聚會所",
-                "palilam_to_titi": "分肉", "Sakapito_a_romi'ad_pipipay": "第七天(比賽日)",
+                "patayra_i_sefi_to_faes_ko_fafahiyan": "女性帶米去在聚會所",
+                "palilam_to_titi": "分肉", "Sakapito_a_romi_ad_pipipay": "第七天(比賽日)",
                 "mapolong_ko_finawlan_maaides": "全體族人相互較勁", "masakero": "跳舞", "ato": "和",
-                "malalefod": "互相賽跑", "horirek_panokay_to_liteng": "完成後送祖靈回家",
-                "Saikoray_a_romi'ad": "最後一天", "mipakerang_ko_kapot": "年齡階層進行完工祭"
+                "malalefod": "互相賽跑", 
+                "horirek_panokay_to_liteng": "完成後送祖靈回家",
+                "panokay": "送回家", // New definition
+                "Saikoray": "最後", // Updated definition
+                "Saikoray_a_romi'ad": "最後一天", 
+                "mipakerang": "完工祭", // Updated definition
+                "mipakerang_ko_kapot": "年齡階層進行完工祭",
+                "kapah": "青年", // New definition
+                "fafahiyan": "女性", // New definition
+                "faes": "糯米", // New definition
+                "mapolong": "全體", // New definition
+                "finawlan": "族人" // New definition
             };
 
-            const allPlayButtons = document.querySelectorAll('.image-play-btn');
+            const allPlayButtons = document.querySelectorAll('.play-btn');
             const allPlayers = document.querySelectorAll('.audio-player');
             const geminiExplainButtons = document.querySelectorAll('.gemini-btn');
             const cultureBtn = document.getElementById('culture-btn');
-            const modal = document.getElementById('gemini-modal');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-            const modalTitle = document.getElementById('modal-title');
-            const modalBody = document.getElementById('modal-body');
+            const geminiModal = document.getElementById('gemini-modal');
+            const modalCloseBtn = geminiModal.querySelector('.modal-close');
+            const modalTitle = geminiModal.querySelector('.modal-title');
+            const modalBody = document.getElementById('modal-body'); // FIX: Access modal-body by ID directly from document
             const tooltip = document.getElementById('tooltip');
 
-            // --- ✨ 點字翻譯邏輯 ---
-            const clickableWords = document.querySelectorAll('.word');
-            clickableWords.forEach(word => {
-                word.addEventListener('click', (e) => {
-                    e.stopPropagation(); 
-                    const key = e.target.dataset.key;
-                    const translation = vocabulary[key];
-                    if (translation) {
-                        tooltip.textContent = translation;
-                        const rect = e.target.getBoundingClientRect();
-                        tooltip.style.left = `${rect.left + window.scrollX}px`;
-                        tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 5}px`;
-                        tooltip.style.display = 'block';
+            let currentHighlightedWord = null; // Track the currently highlighted word span
+
+            // Function to create clickable word spans
+            function createClickableSpans(sentenceText, vocab) {
+                let resultHtml = '';
+                let tempText = sentenceText; 
+                
+                // Sort vocabulary keys by length in descending order to prioritize longer phrases
+                const sortedKeys = Object.keys(vocab).sort((a, b) => b.length - a.length);
+
+                // Placeholder map to store already processed spans
+                const processedSpans = new Map();
+                let placeholderCounter = 0;
+
+                // First pass: identify and replace multi-word phrases with placeholders
+                for (const key of sortedKeys) {
+                    // Check if the key corresponds to a multi-word phrase (contains underscore)
+                    // or if it's explicitly a known multi-word phrase like the title.
+                    // IMPORTANT: Ensure the regex pattern correctly handles apostrophes and spaces within phrases.
+                    let pattern;
+                    if (key.includes('_')) {
+                        pattern = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/_/g, '[\\s’\\-]*');
+                    } else {
+                        // For single words or keys without underscore, match them directly.
+                        pattern = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    }
+                    
+                    // Regex to find occurrences. Use a non-capturing group for the pattern itself.
+                    // Add word boundaries for more precise matching of whole words/phrases.
+                    const regex = new RegExp(`\\b(${pattern})\\b`, 'gi'); 
+                    
+                    // Use a temporary string for replacement to avoid issues with already wrapped content
+                    let newTempText = tempText.replace(regex, (match) => {
+                        // Only replace if it's not a placeholder from a previous, longer match
+                        if (!match.startsWith('__PH_')) { 
+                            const placeholder = `__PH_${placeholderCounter++}__`;
+                            // Store the original matched text with its data-key
+                            processedSpans.set(placeholder, `<span class="word" data-key="${key}">${match}</span>`);
+                            return placeholder;
+                        }
+                        return match; // If it's already a placeholder, return it as is
+                    });
+                    // Only update tempText if changes were made by this regex
+                    if (newTempText !== tempText) {
+                        tempText = newTempText;
+                    }
+                }
+
+                // Second pass: Reconstruct the HTML from segments and restore processed spans
+                let finalParts = [];
+                // Split by the generated placeholders to process the remaining plain text parts
+                const segments = tempText.split(/(__PH_\d+__)/g);
+
+                segments.forEach(segment => {
+                    if (segment.startsWith('__PH_') && processedSpans.has(segment)) {
+                        finalParts.push(processedSpans.get(segment)); // Restore the previously wrapped phrase
+                    } else {
+                        // Process the remaining plain text segment for single words that might not have been part of a multi-word phrase
+                        // This regex matches sequences of word characters (including optional internal apostrophes) or individual non-word characters (like punctuation, spaces)
+                        const individualTokens = segment.match(/(\b\w+'?\w*\b|[^\w\s])/g); 
+                        
+                        if (individualTokens) {
+                            individualTokens.forEach(token => {
+                                let cleanedToken = token.replace(/[,.'’\s]/g, ''); 
+                                if (vocab[cleanedToken]) {
+                                    finalParts.push(`<span class="word" data-key="${cleanedToken}">${token}</span>`);
+                                } else {
+                                    finalParts.push(token); // Add original token if no vocabulary match
+                                }
+                            });
+                        } else {
+                            finalParts.push(segment); // Fallback if segment cannot be further tokenized
+                        }
                     }
                 });
-            });
 
-            document.body.addEventListener('click', () => {
-                tooltip.style.display = 'none';
-            });
+                return finalParts.join('').trim();
+            }
 
+
+            const sentences = [
+                "Rayray no Kiloma’an.",
+                "Faloay ko romi'ad to kiloma’an no Farangaw.",
+                "Sa'ayaw a romi'ad misahafay, mirekal i taliyok no niyaro', milikakawa to lalosidan.",
+                "Sakatosa a romi'ad panemnem, tahidang to liteng misatora, pacaedong to miromromay, mitaowak to kaetohay.",
+                "Sakatolo a romi'ad, pafata'an pacelem na malingad talariyal mikesi'.",
+                "Sakasepat ato sakalima a romi'ad, saromi'ad mikesi' i riyal, micelem micekiw mipacing ko kapah, ta palaylay minokay.",
+                "Sakaenem a romi'ad misahemay, malikoda ko kapah, patayra i sefi to faes ko fafahiyan, palilam to titi.",
+                "Sakapito a romi'ad pipipay, mapolong ko finawlan maaides masakero ato malalefod, horirek panokay to liteng.",
+                "Saikoray a romi'ad mipakerang ko kapot."
+            ];
+
+            const sentenceElements = document.querySelectorAll('.lesson-content .sentence-line');
+            sentenceElements.forEach((lineElement, index) => {
+                const playButton = lineElement.querySelector('.play-btn');
+                const geminiButton = lineElement.querySelector('.gemini-btn');
+                const sentenceTextElement = lineElement.querySelector('.sentence-text');
+                
+                // Update data-text for gemini button with Amis sentence
+                geminiButton.dataset.text = sentences[index];
+
+                // Manually construct the clickable spans for the Amis sentence text
+                sentenceTextElement.innerHTML = createClickableSpans(sentences[index], vocabulary);
+            });
+            
             // --- 音訊播放邏輯 (已修正) ---
             allPlayButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.stopPropagation();
                     const targetAudioId = button.dataset.audio;
                     const targetPlayer = document.getElementById(targetAudioId);
-                    if (!targetPlayer) return;
+                    console.log(`Attempting to play: ${targetAudioId}`); // Log which audio is being targeted
+                    if (!targetPlayer) {
+                        console.error(`Audio element not found: ${targetAudioId}`);
+                        return;
+                    }
 
                     const isCurrentlyPlaying = !targetPlayer.paused;
 
-                    if (!isCurrentlyPlaying) {
+                    if (isCurrentlyPlaying) {
+                        targetPlayer.pause();
+                        console.log(`Paused: ${targetAudioId}`);
+                    } else {
                         allPlayers.forEach(p => {
                             if (p !== targetPlayer) {
                                 p.pause();
-                                p.currentTime = 0;
+                                p.currentTime = 0; // Rewind paused audios
+                                console.log(`Paused and rewound other audio: ${p.id}`);
                             }
                         });
-                    }
-
-                    if (isCurrentlyPlaying) {
-                        targetPlayer.pause();
-                    } else {
-                        targetPlayer.play().catch(err => {
-                            if (err.name !== 'AbortError') {
-                                console.error("播放錯誤:", err);
+                        targetPlayer.play().then(() => {
+                            console.log(`Successfully played: ${targetAudioId}`);
+                        }).catch(err => {
+                            if (err.name === 'NotAllowedError') {
+                                console.warn(`Autoplay/playback blocked for ${targetAudioId}. User interaction may be required.`);
+                            } else if (err.name !== 'AbortError') {
+                                console.error(`Playback error for ${targetAudioId}:`, err);
+                            } else {
+                                console.log(`Playback aborted for ${targetAudioId}.`);
                             }
                         });
                     }
@@ -620,25 +932,34 @@
             });
 
             allPlayers.forEach(player => {
+                // Update button text when audio plays
                 player.addEventListener('play', () => {
-                    const btn = document.querySelector(`[data-audio="${player.id}"]`);
-                    if (btn && btn.querySelector('span')) {
-                        btn.querySelector('span').className = 'pause-icon';
-                    }
+                    const btns = document.querySelectorAll(`[data-audio="${player.id}"]`);
+                    btns.forEach(btn => {
+                        btn.textContent = '❚❚'; // Set pause icon
+                    });
                 });
 
-                player.addEventListener('pause', () => { // This covers both pause and ended
-                    const btn = document.querySelector(`[data-audio="${player.id}"]`);
-                    if (btn && btn.querySelector('span')) {
-                        btn.querySelector('span').className = 'play-icon';
-                    }
+                // Update button text when audio pauses or ends
+                player.addEventListener('pause', () => { 
+                    const btns = document.querySelectorAll(`[data-audio="${player.id}"]`);
+                    btns.forEach(btn => {
+                        btn.textContent = '▶'; // Set play icon
+                    });
+                });
+
+                // Ensure icon resets when audio finishes naturally
+                player.addEventListener('ended', () => {
+                    const btns = document.querySelectorAll(`[data-audio="${player.id}"]`);
+                    btns.forEach(btn => {
+                        btn.textContent = '▶'; // Set play icon
+                    });
                 });
             });
             
-            // --- Gemini API 呼叫邏輯 ---
-            const callGemini = async (prompt) => {
-                modalBody.innerHTML = '<div class="loader"></div>';
-                modal.style.display = 'flex';
+            // --- Gemini API 呼叫邏輯 (for detailed explanation) ---
+            const callGemini = async (prompt, modalBodyElement) => {
+                modalBodyElement.innerHTML = '<div class="loader"></div>';
 
                 const apiKey = ""; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
@@ -654,32 +975,133 @@
                     if (!response.ok) throw new Error(`API 請求失敗，狀態碼: ${response.status}`);
                     const result = await response.json();
                     if (result.candidates && result.candidates[0].content.parts[0].text) {
-                        modalBody.innerHTML = result.candidates[0].content.parts[0].text.replace(/\n/g, '<br>');
+                        return result.candidates[0].content.parts[0].text;
                     } else {
                         throw new Error('從 API 收到的回應格式不正確。');
                     }
                 } catch (error) {
                     console.error('Gemini API 呼叫失敗:', error);
-                    modalBody.innerHTML = `發生錯誤，請稍後再試。<br>(${error.message})`;
+                    return `發生錯誤，請稍後再試。<br>(${error.message})`;
                 }
             };
+            
+            // --- Modal 通用邏輯 ---
+            const setupModal = (modalElement) => { 
+                const closeBtn = modalElement.querySelector('.modal-close');
+                
+                closeBtn.addEventListener('click', () => modalElement.style.display = 'none');
+                modalElement.addEventListener('click', (e) => {
+                    if (e.target === modalElement) {
+                        modalElement.style.display = 'none';
+                    }
+                });
+            };
 
+            setupModal(geminiModal);
+
+            // --- 點字翻譯邏輯 (Enhanced for highlighting and positioning) ---
+            const wordsContainer = document.querySelector('.lesson-content'); // Container for words
+            wordsContainer.addEventListener('click', (e) => {
+                // Clear highlight from previously highlighted word/phrase
+                if (currentHighlightedWord) {
+                    currentHighlightedWord.classList.remove('highlighted-phrase');
+                    currentHighlightedWord.classList.remove('highlighted-single-word');
+                    currentHighlightedWord = null;
+                }
+                tooltip.style.display = 'none'; // Hide tooltip on any click outside a word
+
+                // Check if the clicked element is a word span
+                let targetWordSpan = e.target.closest('.word');
+
+                if (targetWordSpan) {
+                    e.stopPropagation(); // Prevent document.body click from immediately hiding tooltip
+                    
+                    const key = targetWordSpan.dataset.key;
+                    const translation = vocabulary[key];
+                    
+                    if (translation) {
+                        tooltip.textContent = translation;
+                        const rect = targetWordSpan.getBoundingClientRect();
+                        
+                        // Temporarily show tooltip to get its dimensions
+                        tooltip.style.display = 'block';
+                        const tooltipHeight = tooltip.offsetHeight;
+                        const tooltipWidth = tooltip.offsetWidth;
+                        
+                        // Calculate positions
+                        const spaceAbove = rect.top;
+                        const spaceBelow = window.innerHeight - rect.bottom;
+                        
+                        let topPosition;
+                        if (spaceAbove > tooltipHeight + 5) { // Prefer above if enough space
+                            topPosition = rect.top + window.scrollY - tooltipHeight - 5;
+                        } else if (spaceBelow > tooltipHeight + 5) { // Otherwise, prefer below if enough space
+                            topPosition = rect.bottom + window.scrollY + 5;
+                        } else { // Fallback: try to place below, centered on screen vertically if too little space
+                            topPosition = rect.bottom + window.scrollY + 5; // Default to below
+                            // Could add more complex logic here to prevent going off-screen on very small viewports
+                        }
+
+                        let leftPosition = rect.left + window.scrollX + (rect.width / 2) - (tooltipWidth / 2);
+                        // Adjust if it goes off left edge
+                        if (leftPosition < 5) {
+                            leftPosition = 5;
+                        }
+                        // Adjust if it goes off right edge
+                        if (leftPosition + tooltipWidth > window.innerWidth - 5) {
+                            leftPosition = window.innerWidth - tooltipWidth - 5;
+                        }
+
+
+                        tooltip.style.left = `${leftPosition}px`;
+                        tooltip.style.top = `${topPosition}px`;
+                        
+                        // Determine if it's a multi-word phrase or single word for highlighting
+                        // Check if the vocabulary key itself contains '_' for a multi-word phrase,
+                        // or if the original matched text (targetWordSpan.textContent) contains spaces.
+                        // For this specific logic, checking key.includes('_') is more reliable
+                        // as the `createClickableSpans` function already sets data-key based on best match.
+                        if (key.includes('_')) { // Assuming multi-word phrases have '_' in their key
+                            targetWordSpan.classList.add('highlighted-phrase'); // Red for phrases
+                        } else {
+                            // Also check if the word is actually part of a known multi-word phrase that might not be separated by '_' in the vocabulary key
+                            // This is a more complex check, but generally if a word's key doesn't have '_', it's a single word.
+                            targetWordSpan.classList.add('highlighted-single-word'); // Blue for single words
+                        }
+                        currentHighlightedWord = targetWordSpan;
+                    }
+                }
+            });
+
+            // Hide tooltip and remove highlight when clicking anywhere else on the body
+            document.body.addEventListener('click', () => {
+                tooltip.style.display = 'none';
+                if (currentHighlightedWord) {
+                    currentHighlightedWord.classList.remove('highlighted-phrase');
+                    currentHighlightedWord.classList.remove('highlighted-single-word');
+                    currentHighlightedWord = null;
+                }
+            });
+
+
+            // --- 逐句詳解 & 文化探索邏輯 ---
             geminiExplainButtons.forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', async () => {
                     const sentence = button.dataset.text;
+
                     modalTitle.innerText = '📖 逐句詳解';
-                    // 優化後的 prompt，整合了您提供的正確資訊
-                    const prompt = `請根據以下提供的「正確單字定義」，將這句阿美語翻譯成繁體中文，並用條列式詳細解釋其中的文法結構與單字。請以初學者容易理解的方式說明。
+                    geminiModal.style.display = 'flex';
+                    const prompt = `請根據以下提供的「正確單字定義」，將這句阿美語「${sentence}」翻譯成繁體中文，並用條列式詳細解釋其中的文法結構與單字。請以初學者容易理解的方式方式說明。
 
 **正確單字定義:**
 * Faloay：數字 "8"
 * a romi'ad：天 (a 是連繫詞)
-* ko：是主格標記
+* ko：主格
 * no：屬格
 * to：斜格
 * mirekal：報訊
 * taliyok no niyaro'：部落周圍
-* milikakawa：準備器具
+* milikakawa：準備器具/啟程
 * lalosidan：傳統器具
 * misahafay：準備日
 * panemnem: 給泉水
@@ -688,23 +1110,38 @@
 * pacaedong to miromromay: 青年領導接受交任務
 * mitaowak to kaetohay: 飲盡蒸餾酒
 * pafata'an pacelem: 一早清點人數
-* na malingad talariyal mikesi': 才出發到海邊舉行海祭
-* saromi'ad mikesi' i riyal: 青年整天在海邊
+* na_malingad_talariyal_mikesi': 才出發到海邊舉行海祭
+* saromi_ad mikesi' i riyal: 青年整天在海邊
 * micelem: 潛水
 * micekiw: 採集螺貝類
 * mipacing ko kapah: 青年射魚
-* ta palaylay minokay: 才從海邊跳勇士舞回到聚會所
+* ta_palaylay_minokay: 才從海邊跳勇士舞回到聚會所
 * misahemay: 搗杵造飯(製作糯米飯)
-* malikoda ko kapah: 青年大會舞
-* patayra i sefi to faes ko fafahiyan: 女性使帶米去在聚會所
-* palilam to titi: 分肉
-* Sakapito a romi'ad pipipay: 第七天(比賽日)
-* mapolong ko finawlan maaides: 全體族人相互較勁
+* malikoda_ko_kapah: 青年大會舞
+* patayra_i_sefi_to_faes_ko_fafahiyan: 女性帶米去在聚會所
+* palilam_to_titi: 分肉
+* Sakapito_a_romi_ad_pipipay: 第七天(比賽日)
+* mapolong_ko_finawlan_maaides: 全體族人相互較勁
 * masakero: 跳舞
 * malalefod: 互相賽跑
-* horirek panokay to liteng: 完成後送祖靈回家
-* Saikoray a romi'ad: 最後一天
-* mipakerang ko kapot: 年齡階層進行完工祭
+* horirek_panokay_to_liteng: 完成後送祖靈回家
+* Saikoray_a_romi_ad: 最後一天
+* mipakerang_ko_kapot: 年齡階層進行完工祭
+* Rayray: 程序
+* a: 連繫詞
+* i: 在... (介繫詞)
+* romi'ad: 天; 天氣
+* mipakerang: 完工祭
+* Sa'ayaw: 最先
+* Saikoray: 最後
+* palaylay: 勇士舞
+* minokay: 回家
+* panokay: 送回家
+* kapah: 青年
+* fafahiyan: 女性
+* faes: 糯米
+* mapolong: 全體
+* finawlan: 族人
 
 **分析目標句：**
 「${sentence}」
@@ -719,25 +1156,23 @@
 **文法結構：**
 * [文法點1]：[解釋1]
 * [文法點2]：[解釋2]`;
-                    callGemini(prompt);
+                    const responseText = await callGemini(prompt, modalBody);
+                    modalBody.innerHTML = responseText.replace(/\n/g, '<br>');
                 });
             });
 
-            cultureBtn.addEventListener('click', () => {
+            cultureBtn.addEventListener('click', async () => {
                 modalTitle.innerText = '✨ 探索豐年祭文化';
-                const fullText = Array.from(document.querySelectorAll('.gemini-btn')).map(btn => btn.dataset.text).join('\n');
-                const prompt = `我正在學習關於台灣阿美族豐年祭 (Kiloma'an) 的一篇阿美語課文。請以一個對文化感興趣的語言學習者的角度，用繁體中文詳細介紹豐年祭的文化背景與重要性，並說明在這篇課文中提到的程序（例如：misahafay, panemnem, mikesi' 等）分別代表什麼文化意義。\n\n課文內容參考如下：\n${fullText}`;
-                callGemini(prompt);
-            });
+                geminiModal.style.display = 'flex';
+                // Construct full text from sentences array for cultural context.
+                // Assuming `sentences` array contains only the Amis text now.
+                const fullText = sentences.join('\n'); 
 
-            const closeModal = () => {
-                modal.style.display = 'none';
-                modalBody.innerHTML = '';
-            };
-            modalCloseBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) { closeModal(); }
+                const prompt = `我正在學習關於台灣阿美族豐年祭 (Kiloma'an) 的一篇阿美語課文。請以一個對文化感興趣的語言學習者的角度，用繁體中文詳細介紹豐年祭的文化背景與重要性，並說明在這篇課文中提到的程序（例如：misahafay, panemnem, mikesi' 等）分別代表什麼文化意義。\n\n課文內容參考如下：\n${fullText}`;
+                const responseText = await callGemini(prompt, modalBody);
+                modalBody.innerHTML = responseText.replace(/\n/g, '<br>');
             });
+            
         });
     </script>
 </body>
