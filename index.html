@@ -11,19 +11,88 @@
             background-color: #f7f6ef; 
             color: #333; 
             margin: 0; 
-            padding: 1em; 
+            padding: 0; /* 移除 body 的 padding */
         }
-        .container { max-width: 800px; margin: auto; text-align: center; }
+        .container { max-width: 800px; margin: auto; text-align: center; padding: 1em; /* 將 padding 移到 container */}
         
-        /* --- ✨ 頁首樣式 (已更新) --- */
+        /* --- ✨ 新增首頁動畫樣式 --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease-out;
+        }
+        #splash-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 確保影片完整顯示，不裁切 */
+            transform: translate(-50%, -50%);
+        }
+        #enter-btn {
+            position: relative;
+            z-index: 2001;
+            padding: 15px 35px;
+            font-size: 1.5em;
+            color: white;
+            background-color: rgba(48, 80, 48, 0.7);
+            border: 2px solid white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #enter-btn:hover {
+            background-color: rgba(48, 80, 48, 0.9);
+            transform: scale(1.05);
+        }
+        
+        /* ✨ 聲音控制按鈕 */
+        #volume-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2001;
+            background: rgba(0,0,0,0.4);
+            color: white;
+            border: 1px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #main-content {
+            display: none; /* 預設隱藏主內容 */
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        /* --- ✨ 頁首樣式 --- */
         .page-header {
             display: flex;
-            justify-content: flex-end; /* 靠右對齊 */
+            justify-content: space-between; /* 讓元素分開對齊 */
             align-items: center;
-            gap: 20px; /* 增加間距 */
             padding: 10px 0;
             border-bottom: 2px solid #e8e6d9;
             margin-bottom: 1.5em;
+        }
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         .page-header .logo {
             max-height: 50px;
@@ -31,8 +100,21 @@
         .page-header .instructor-name {
             font-size: 1em;
             color: #555;
-            text-align: right; 
+            white-space: nowrap; /* 避免教師姓名換行 */
         }
+
+        #back-btn {
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #555;
+            padding: 5px 10px;
+        }
+        #back-btn:hover {
+            color: #000;
+        }
+
 
         h1, h2 { text-align: center; color: #305030; }
         
@@ -44,14 +126,14 @@
             margin-bottom: -10px;
         }
 
-        /* --- ✨ 課程導覽列 --- */
-        .lesson-nav {
+        /* --- ✨ 課程導覽列 & 測驗區塊 --- */
+        .lesson-nav, .quiz-section {
             background-color: #e8e6d9;
             padding: 1em;
             border-radius: 12px;
             margin: 1.5em 0;
         }
-        .lesson-nav h3 {
+        .lesson-nav h3, .quiz-section h3 {
             margin-top: 0;
             color: #305030;
             border-bottom: 2px solid #c9c7b9;
@@ -66,8 +148,8 @@
             padding: 0;
             margin: 0;
         }
-        .lesson-links a {
-            display: block;
+        .lesson-links a, .quiz-btn {
+            display: inline-block;
             padding: 10px 20px;
             background-color: #fff;
             border: 1px solid #ccc;
@@ -76,12 +158,38 @@
             text-decoration: none;
             transition: all 0.3s;
         }
-        .lesson-links a:hover {
+        .lesson-links a:hover, .quiz-btn:hover {
             background-color: #305030;
             color: #fff;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+        
+        /* ✨ 線上測驗區塊樣式 (方案一：聚焦單一測驗) */
+        .quiz-content {
+            padding: 1.5em 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .quiz-content p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .quiz-item img {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .quiz-btn {
+            font-size: 1.2em;
+            padding: 12px 28px;
+        }
+
 
         /* --- 新版文字與按鈕佈局 --- */
         .lesson-content {
@@ -205,141 +313,175 @@
         /* 響應式調整 */
         @media (max-width: 600px) {
             .page-header {
-                justify-content: center;
-                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+             .header-info {
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        
-        <header class="page-header">
-            <p class="instructor-name">授課教師：蘿拉麻吉 Rolla Moggi</p>
-            <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1749659604/vxem1akzssudvs0neffn.png" alt="Logo" class="logo">
-        </header>
-
-        <div class="title-container">
-            <h1>Rayray no Kiloma’an</h1>
-            <button class="image-play-btn" data-audio="audio-title"><span class="play-icon"></span></button>
-        </div>
-        <h2>📖 豐年祭的程序｜課文朗讀練習</h2>
-
-        <!-- ✨ 課程導覽列 -->
-        <nav class="lesson-nav">
-            <h3>文化課程列表</h3>
-            <ul class="lesson-links">
-                <li><a href="https://www.youtube.com/watch?v=zkV900qsffY" target="_blank" rel="noopener noreferrer">第1堂課：豐年祭的介紹</a></li>
-                <li><a href="https://www.youtube.com/watch?v=cxPQUPFRUfI" target="_blank" rel="noopener noreferrer">第2堂課：馬蘭豐年祭</a></li>
-                <li><a href="https://youtu.be/3O6G_ujIM2I" target="_blank" rel="noopener noreferrer">第2堂課：都蘭豐年祭</a></li>
-                <li><a href="https://www.youtube.com/watch?v=dKtyTTbKBvs" target="_blank" rel="noopener noreferrer">第3堂課：複音唱法介紹</a></li>
-                <li><a href="https://reurl.cc/VYvR5y" target="_blank" rel="noopener noreferrer">第3堂課：馬蘭複音歌謠</a></li>
-                <li><a href="https://www.facebook.com/watch/?v=800065338528852" target="_blank" rel="noopener noreferrer">第4堂課：少年組學習</a></li>
-                <li><a href="https://www.youtube.com/watch?v=haXUddf3Ygs" target="_blank" rel="noopener noreferrer">第4-1堂課：婦女組歌舞</a></li>
-                <li><a href="https://www.youtube.com/watch?v=6milVeLkKN8" target="_blank" rel="noopener noreferrer">第4-2堂課：勇士護衛舞</a></li>
-                <li><a href="https://www.youtube.com/watch?v=GDurQY3ECTo" target="_blank" rel="noopener noreferrer">第5堂課：傳統歌舞</a></li>
-                <li><a href="https://www.youtube.com/watch?v=ochU3S1gQNg" target="_blank" rel="noopener noreferrer">第5堂課：現代舞</a></li>
-                <li><a href="https://rollamoggi123.github.io/rayray-no-kiloma-an-no-singsi/" target="_blank" rel="noopener noreferrer">教師示範版大富翁</a></li>
-                <li><a href="https://rollamoggi123.github.io/rayray-no-kiloma-an-no-mitiliday/" target="_blank" rel="noopener noreferrer">族語大富翁：互動教學版</a></li>
-            </ul>
-        </nav>
-
-        <div class="lesson-content">
-            <!-- 句子 1 -->
-            <div class="sentence-line">
-                <div class="button-group">
-                    <button class="image-play-btn" data-audio="audio-1"><span class="play-icon"></span></button>
-                    <button class="gemini-btn" data-text="Faloay ko romi'ad to kiloma’an no Farangaw.">📖</button>
-                </div>
-                <p class="sentence-text">
-                    <span class="word" data-key="Faloay">Faloay</span> <span class="word" data-key="ko">ko</span> <span class="word" data-key="romi'ad">romi'ad</span> <span class="word" data-key="to">to</span> <span class="word" data-key="kiloma’an">kiloma’an</span> <span class="word" data-key="no">no</span> <span class="word" data-key="Farangaw">Farangaw</span>.
-                </p>
-            </div>
-            <!-- 句子 2 -->
-            <div class="sentence-line">
-                <div class="button-group">
-                    <button class="image-play-btn" data-audio="audio-2"><span class="play-icon"></span></button>
-                    <button class="gemini-btn" data-text="Sa'ayaw a romi'ad misahafay, mirekal i taliyok no niyaro', milikakawa to lalosidan.">📖</button>
-                </div>
-                <p class="sentence-text">
-                    <span class="word" data-key="Sa'ayaw_a_romi'ad">Sa'ayaw a romi'ad</span> <span class="word" data-key="misahafay">misahafay</span>, <span class="word" data-key="mirekal">mirekal</span> <span class="word" data-key="i">i</span> <span class="word" data-key="taliyok_no_niyaro'">taliyok no niyaro'</span>, <span class="word" data-key="milikakawa">milikakawa</span> <span class="word" data-key="to_lalosidan">to lalosidan</span>.
-                </p>
-            </div>
-            <!-- 句子 3 -->
-            <div class="sentence-line">
-                 <div class="button-group">
-                    <button class="image-play-btn" data-audio="audio-3"><span class="play-icon"></span></button>
-                    <button class="gemini-btn" data-text="Sakatosa a romi'ad panemnem, tahidang to liteng misatora, pacaedong to mirormomay, mitaowak to kaetohay.">📖</button>
-                </div>
-                <p class="sentence-text">
-                    <span class="word" data-key="Sakatosa_a_romi'ad">Sakatosa a romi'ad</span> <span class="word" data-key="panemnem">panemnem</span>, <span class="word" data-key="tahidang_to_liteng">tahidang to liteng</span> <span class="word" data-key="misatora">misatora</span>, <span class="word" data-key="pacaedong_to_miromromay">pacaedong to mirormomay</span>, <span class="word" data-key="mitaowak_to_kaetohay">mitaowak to kaetohay</span>.
-                </p>
-            </div>
-            <!-- 句子 4 -->
-            <div class="sentence-line">
-                 <div class="button-group">
-                    <button class="image-play-btn" data-audio="audio-4"><span class="play-icon"></span></button>
-                    <button class="gemini-btn" data-text="Sakatolo a romi'ad, pafata'an pacelem na malingad talariyal mikesi'.">📖</button>
-                </div>
-                <p class="sentence-text">
-                    <span class="word" data-key="Sakatolo_a_romi'ad">Sakatolo a romi'ad</span>, <span class="word" data-key="pafata'an_pacelem">pafata'an pacelem</span> <span class="word" data-key="na_malingad_talariyal_mikesi'">na malingad talariyal mikesi'</span>.
-                </p>
-            </div>
-            <!-- 句子 5 -->
-            <div class="sentence-line">
-                 <div class="button-group">
-                    <button class="image-play-btn" data-audio="audio-5"><span class="play-icon"></span></button>
-                    <button class="gemini-btn" data-text="Sakaseepat ato sakalima a romi'ad, saromi'ad mikesi' i riyal, micelem micekiw mipacing ko kapah, ta palaylay minokay.">📖</button>
-                </div>
-                <p class="sentence-text">
-                    <span class="word" data-key="Sakaseepat_ato_sakalima_a_romi'ad">Sakaseepat ato sakalima a romi'ad</span>, <span class="word" data-key="saromi'ad_mikesi'_i_riyal">saromi'ad mikesi' i riyal</span>, <span class="word" data-key="micelem">micelem</span> <span class="word" data-key="micekiw">micekiw</span> <span class="word" data-key="mipacing_ko_kapah">mipacing ko kapah</span>, <span class="word" data-key="ta_palaylay_minokay">ta palaylay minokay</span>.
-                </p>
-            </div>
-            <!-- 句子 6 -->
-            <div class="sentence-line">
-                 <div class="button-group">
-                    <button class="image-play-btn" data-audio="audio-6"><span class="play-icon"></span></button>
-                    <button class="gemini-btn" data-text="Sakaenem a romi'ad misahemay, malikoda ko kapah, patayra i sefi to faes ko fafahiyan, palilam to titi.">📖</button>
-                </div>
-                <p class="sentence-text">
-                    <span class="word" data-key="Sakaenem_a_romi'ad">Sakaenem a romi'ad</span> <span class="word" data-key="misahemay">misahemay</span>, <span class="word" data-key="malikoda_ko_kapah">malikoda ko kapah</span>, <span class="word" data-key="patayra_i_sefi_to_faes_ko_fafahiyan">patayra i sefi to faes ko fafahiyan</span>, <span class="word" data-key="palilam_to_titi">palilam to titi</span>.
-                </p>
-            </div>
-            <!-- 句子 7 -->
-            <div class="sentence-line">
-                 <div class="button-group">
-                    <button class="image-play-btn" data-audio="audio-7"><span class="play-icon"></span></button>
-                    <button class="gemini-btn" data-text="Sakapito a romi'ad pipipay, mapolong ko finawlan maaides masakero ato malalefod, horirek panokay to liteng.">📖</button>
-                </div>
-                <p class="sentence-text">
-                    <span class="word" data-key="Sakapito_a_romi'ad_pipipay">Sakapito a romi'ad pipipay</span>, <span class="word" data-key="mapolong_ko_finawlan_maaides">mapolong ko finawlan maaides</span> <span class="word" data-key="masakero">masakero</span> <span class="word" data-key="ato">ato</span> <span class="word" data-key="malalefod">malalefod</span>, <span class="word" data-key="horirek_panokay_to_liteng">horirek panokay to liteng</span>.
-                </p>
-            </div>
-            <!-- 句子 8 -->
-            <div class="sentence-line">
-                 <div class="button-group">
-                    <button class="image-play-btn" data-audio="audio-8"><span class="play-icon"></span></button>
-                    <button class="gemini-btn" data-text="Saikoray a romi'ad mipakerang ko kapot.">📖</button>
-                </div>
-                <p class="sentence-text">
-                    <span class="word" data-key="Saikoray_a_romi'ad">Saikoray a romi'ad</span> <span class="word" data-key="mipakerang_ko_kapot">mipakerang ko kapot</span>.
-                </p>
-            </div>
-        </div>
-
-        <button id="culture-btn" class="culture-btn">✨ 探索豐年祭文化</button>
-
-        <!-- 隱藏的音訊播放器 (已重新對應) -->
-        <audio id="audio-title" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657545/%E8%AA%B2%E6%96%87rayray_no_kiloma_an_k7hpsw.mp3"></audio> <!-- line1 -->
-        <audio id="audio-1" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657974/line2_gti8hy.mp3"></audio> <!-- line2 -->
-        <audio id="audio-2" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658020/line3_blpsw6.mp3"></audio> <!-- line3 -->
-        <audio id="audio-3" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658115/line4_ngh0nr.mp3"></audio> <!-- line4 -->
-        <audio id="audio-4" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658179/line5_omltw4.mp3"></audio> <!-- line5 -->
-        <audio id="audio-5" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658270/line6_pf2hef.mp3"></audio> <!-- line6 -->
-        <audio id="audio-6" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658330/line7_fg4jqm.mp3"></audio> <!-- line7 -->
-        <audio id="audio-7" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658390/line8_qkssrh.mp3"></audio> <!-- line8 -->
-        <audio id="audio-8" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658429/line9_txq625.mp3"></audio> <!-- line9 -->
+    <!-- ✨ 首頁動畫 -->
+    <div id="splash-screen">
+        <video id="splash-video" autoplay muted loop playsinline>
+            <source src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750665618/%E5%A4%A7%E5%AF%8C%E7%BF%81%E5%8B%95%E7%95%AB_fwbjxs.mp4" type="video/mp4">
+            您的瀏覽器不支援影片播放。
+        </video>
+        <button id="enter-btn">進入課程</button>
+        <button id="volume-btn">🔈</button>
     </div>
+
+    <main id="main-content">
+        <div class="container">
+            
+            <header class="page-header">
+                <div class="header-left">
+                     <button id="back-btn">↩️</button>
+                    <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1750667116/ChatGPT_Image_2025%E5%B9%B46%E6%9C%886%E6%97%A5_%E4%B8%8B%E5%8D%8803_49_10_g50dif.png" alt="臺東縣本土語教學 Logo" class="logo">
+                </div>
+                <div class="header-right">
+                    <p class="instructor-name">授課教師：蘿拉麻吉 Rolla Moggi</p>
+                    <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1749659604/vxem1akzssudvs0neffn.png" alt="Logo" class="logo">
+                </div>
+            </header>
+
+            <div class="title-container">
+                <h1>Rayray no Kiloma’an</h1>
+                <button class="image-play-btn" data-audio="audio-title"><span class="play-icon"></span></button>
+            </div>
+            <h2>📖 豐年祭的程序｜課文朗讀練習</h2>
+
+            <!-- ✨ 課程導覽列 -->
+            <nav class="lesson-nav">
+                <h3>文化課程列表</h3>
+                <ul class="lesson-links">
+                    <li><a href="https://www.youtube.com/watch?v=zkV900qsffY" target="_blank" rel="noopener noreferrer">第1堂課：豐年祭的介紹</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=cxPQUPFRUfI" target="_blank" rel="noopener noreferrer">第2堂課：馬蘭豐年祭</a></li>
+                    <li><a href="https://youtu.be/3O6G_ujIM2I" target="_blank" rel="noopener noreferrer">第2堂課：都蘭豐年祭</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=dKtyTTbKBvs" target="_blank" rel="noopener noreferrer">第3堂課：複音唱法介紹</a></li>
+                    <li><a href="https://reurl.cc/VYvR5y" target="_blank" rel="noopener noreferrer">第3堂課：馬蘭複音歌謠</a></li>
+                    <li><a href="https://www.facebook.com/watch/?v=800065338528852" target="_blank" rel="noopener noreferrer">第4堂課：少年組學習</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=haXUddf3Ygs" target="_blank" rel="noopener noreferrer">第4-1堂課：婦女組歌舞</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=6milVeLkKN8" target="_blank" rel="noopener noreferrer">第4-2堂課：勇士護衛舞</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=GDurQY3ECTo" target="_blank" rel="noopener noreferrer">第5堂課：傳統歌舞</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=ochU3S1gQNg" target="_blank" rel="noopener noreferrer">第5堂課：現代舞</a></li>
+                    <li><a href="https://rollamoggi123.github.io/rayray-no-kiloma-an-no-singsi/" target="_blank" rel="noopener noreferrer">教師示範版大富翁</a></li>
+                    <li><a href="https://rollamoggi123.github.io/rayray-no-kiloma-an-no-mitiliday/" target="_blank" rel="noopener noreferrer">族語大富翁：互動教學版</a></li>
+                </ul>
+            </nav>
+
+            <div class="lesson-content">
+                <!-- 句子 1 -->
+                <div class="sentence-line">
+                    <div class="button-group">
+                        <button class="image-play-btn" data-audio="audio-1"><span class="play-icon"></span></button>
+                        <button class="gemini-btn" data-text="Faloay ko romi'ad to kiloma’an no Farangaw.">📖</button>
+                    </div>
+                    <p class="sentence-text">
+                        <span class="word" data-key="Faloay">Faloay</span> <span class="word" data-key="ko">ko</span> <span class="word" data-key="romi'ad">romi'ad</span> <span class="word" data-key="to">to</span> <span class="word" data-key="kiloma’an">kiloma’an</span> <span class="word" data-key="no">no</span> <span class="word" data-key="Farangaw">Farangaw</span>.
+                    </p>
+                </div>
+                <!-- 句子 2 -->
+                <div class="sentence-line">
+                    <div class="button-group">
+                        <button class="image-play-btn" data-audio="audio-2"><span class="play-icon"></span></button>
+                        <button class="gemini-btn" data-text="Sa'ayaw a romi'ad misahafay, mirekal i taliyok no niyaro', milikakawa to lalosidan.">📖</button>
+                    </div>
+                    <p class="sentence-text">
+                        <span class="word" data-key="Sa'ayaw_a_romi'ad">Sa'ayaw a romi'ad</span> <span class="word" data-key="misahafay">misahafay</span>, <span class="word" data-key="mirekal">mirekal</span> <span class="word" data-key="i">i</span> <span class="word" data-key="taliyok_no_niyaro'">taliyok no niyaro'</span>, <span class="word" data-key="milikakawa">milikakawa</span> <span class="word" data-key="to_lalosidan">to lalosidan</span>.
+                    </p>
+                </div>
+                <!-- 句子 3 -->
+                <div class="sentence-line">
+                     <div class="button-group">
+                        <button class="image-play-btn" data-audio="audio-3"><span class="play-icon"></span></button>
+                        <button class="gemini-btn" data-text="Sakatosa a romi'ad panemnem, tahidang to liteng misatora, pacaedong to mirormomay, mitaowak to kaetohay.">📖</button>
+                    </div>
+                    <p class="sentence-text">
+                        <span class="word" data-key="Sakatosa_a_romi'ad">Sakatosa a romi'ad</span> <span class="word" data-key="panemnem">panemnem</span>, <span class="word" data-key="tahidang_to_liteng">tahidang to liteng</span> <span class="word" data-key="misatora">misatora</span>, <span class="word" data-key="pacaedong_to_miromromay">pacaedong to mirormomay</span>, <span class="word" data-key="mitaowak_to_kaetohay">mitaowak to kaetohay</span>.
+                    </p>
+                </div>
+                <!-- 句子 4 -->
+                <div class="sentence-line">
+                     <div class="button-group">
+                        <button class="image-play-btn" data-audio="audio-4"><span class="play-icon"></span></button>
+                        <button class="gemini-btn" data-text="Sakatolo a romi'ad, pafata'an pacelem na malingad talariyal mikesi'.">📖</button>
+                    </div>
+                    <p class="sentence-text">
+                        <span class="word" data-key="Sakatolo_a_romi'ad">Sakatolo a romi'ad</span>, <span class="word" data-key="pafata'an_pacelem">pafata'an pacelem</span> <span class="word" data-key="na_malingad_talariyal_mikesi'">na malingad talariyal mikesi'</span>.
+                    </p>
+                </div>
+                <!-- 句子 5 -->
+                <div class="sentence-line">
+                     <div class="button-group">
+                        <button class="image-play-btn" data-audio="audio-5"><span class="play-icon"></span></button>
+                        <button class="gemini-btn" data-text="Sakaseepat ato sakalima a romi'ad, saromi'ad mikesi' i riyal, micelem micekiw mipacing ko kapah, ta palaylay minokay.">📖</button>
+                    </div>
+                    <p class="sentence-text">
+                        <span class="word" data-key="Sakaseepat_ato_sakalima_a_romi'ad">Sakaseepat ato sakalima a romi'ad</span>, <span class="word" data-key="saromi'ad_mikesi'_i_riyal">saromi'ad mikesi' i riyal</span>, <span class="word" data-key="micelem">micelem</span> <span class="word" data-key="micekiw">micekiw</span> <span class="word" data-key="mipacing_ko_kapah">mipacing ko kapah</span>, <span class="word" data-key="ta_palaylay_minokay">ta palaylay minokay</span>.
+                    </p>
+                </div>
+                <!-- 句子 6 -->
+                <div class="sentence-line">
+                     <div class="button-group">
+                        <button class="image-play-btn" data-audio="audio-6"><span class="play-icon"></span></button>
+                        <button class="gemini-btn" data-text="Sakaenem a romi'ad misahemay, malikoda ko kapah, patayra i sefi to faes ko fafahiyan, palilam to titi.">📖</button>
+                    </div>
+                    <p class="sentence-text">
+                        <span class="word" data-key="Sakaenem_a_romi'ad">Sakaenem a romi'ad</span> <span class="word" data-key="misahemay">misahemay</span>, <span class="word" data-key="malikoda_ko_kapah">malikoda ko kapah</span>, <span class="word" data-key="patayra_i_sefi_to_faes_ko_fafahiyan">patayra i sefi to faes ko fafahiyan</span>, <span class="word" data-key="palilam_to_titi">palilam to titi</span>.
+                    </p>
+                </div>
+                <!-- 句子 7 -->
+                <div class="sentence-line">
+                     <div class="button-group">
+                        <button class="image-play-btn" data-audio="audio-7"><span class="play-icon"></span></button>
+                        <button class="gemini-btn" data-text="Sakapito a romi'ad pipipay, mapolong ko finawlan maaides masakero ato malalefod, horirek panokay to liteng.">📖</button>
+                    </div>
+                    <p class="sentence-text">
+                        <span class="word" data-key="Sakapito_a_romi'ad_pipipay">Sakapito a romi'ad pipipay</span>, <span class="word" data-key="mapolong_ko_finawlan_maaides">mapolong ko finawlan maaides</span> <span class="word" data-key="masakero">masakero</span> <span class="word" data-key="ato">ato</span> <span class="word" data-key="malalefod">malalefod</span>, <span class="word" data-key="horirek_panokay_to_liteng">horirek panokay to liteng</span>.
+                    </p>
+                </div>
+                <!-- 句子 8 -->
+                <div class="sentence-line">
+                     <div class="button-group">
+                        <button class="image-play-btn" data-audio="audio-8"><span class="play-icon"></span></button>
+                        <button class="gemini-btn" data-text="Saikoray a romi'ad mipakerang ko kapot.">📖</button>
+                    </div>
+                    <p class="sentence-text">
+                        <span class="word" data-key="Saikoray_a_romi'ad">Saikoray a romi'ad</span> <span class="word" data-key="mipakerang_ko_kapot">mipakerang ko kapot</span>.
+                    </p>
+                </div>
+            </div>
+    
+            <!-- ✨ 線上測驗區塊 (已更新) -->
+            <section class="quiz-section">
+                <h3>第一堂課：立即全班測驗</h3>
+                <div class="quiz-content">
+                    <p>請點擊下方按鈕或掃描 QR Code 進入測驗</p>
+                    <div class="quiz-item">
+                        <a href="https://wayground.com/join?gc=339281" target="_blank" rel="noopener noreferrer">
+                            <img src="https://res.cloudinary.com/dm1ksvptk/image/upload/v1750670292/%E7%AC%AC%E4%B8%80%E5%A0%82%E6%B8%AC%E9%A9%97.png" alt="第一堂課測驗 QR Code">
+                        </a>
+                    </div>
+                     <a href="https://wayground.com/join?gc=339281" class="quiz-btn" target="_blank" rel="noopener noreferrer">進入第一堂課測驗</a>
+                </div>
+            </section>
+
+            <button id="culture-btn" class="culture-btn">✨ 探索豐年祭文化</button>
+        </div>
+    </main>
+
+    <!-- 隱藏的音訊播放器 (已重新對應) -->
+    <audio id="audio-title" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657545/%E8%AA%B2%E6%96%87rayray_no_kiloma_an_k7hpsw.mp3"></audio> <!-- line1 -->
+    <audio id="audio-1" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750657974/line2_gti8hy.mp3"></audio> <!-- line2 -->
+    <audio id="audio-2" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658020/line3_blpsw6.mp3"></audio> <!-- line3 -->
+    <audio id="audio-3" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658115/line4_ngh0nr.mp3"></audio> <!-- line4 -->
+    <audio id="audio-4" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658179/line5_omltw4.mp3"></audio> <!-- line5 -->
+    <audio id="audio-5" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658270/line6_pf2hef.mp3"></audio> <!-- line6 -->
+    <audio id="audio-6" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658330/line7_fg4jqm.mp3"></audio> <!-- line7 -->
+    <audio id="audio-7" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658390/line8_qkssrh.mp3"></audio> <!-- line8 -->
+    <audio id="audio-8" class="audio-player" src="https://res.cloudinary.com/dm1ksvptk/video/upload/v1750658429/line9_txq625.mp3"></audio> <!-- line9 -->
 
     <!-- 翻譯提示框 -->
     <div id="tooltip"></div>
@@ -356,6 +498,43 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
+            // --- ✨ 首頁動畫邏輯 (已更新，更穩定) ---
+            const splashScreen = document.getElementById('splash-screen');
+            const enterBtn = document.getElementById('enter-btn');
+            const mainContent = document.getElementById('main-content');
+            const volumeBtn = document.getElementById('volume-btn');
+            const splashVideo = document.getElementById('splash-video');
+            const backBtn = document.getElementById('back-btn');
+
+            const showMainContent = () => {
+                splashScreen.style.opacity = '0';
+                splashScreen.addEventListener('transitionend', () => {
+                    splashScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    void mainContent.offsetWidth; 
+                    mainContent.style.opacity = '1';
+                }, { once: true });
+            };
+
+            const showSplashScreen = () => {
+                mainContent.style.opacity = '0';
+                mainContent.addEventListener('transitionend', () => {
+                    mainContent.style.display = 'none';
+                    splashScreen.style.display = 'flex';
+                    void splashScreen.offsetWidth;
+                    splashScreen.style.opacity = '1';
+                }, { once: true });
+            };
+
+            enterBtn.addEventListener('click', showMainContent);
+            backBtn.addEventListener('click', showSplashScreen);
+
+            volumeBtn.addEventListener('click', () => {
+                splashVideo.muted = !splashVideo.muted;
+                volumeBtn.textContent = splashVideo.muted ? '🔈' : '🔊';
+            });
+
+
             // --- ✨ 智慧詞典 (已更新) ---
             const vocabulary = {
                 "Faloay": "八 (數字)", "ko": "（主格標記）", "romi'ad": "天、日子",
@@ -392,7 +571,7 @@
             const clickableWords = document.querySelectorAll('.word');
             clickableWords.forEach(word => {
                 word.addEventListener('click', (e) => {
-                    e.stopPropagation(); // 防止事件冒泡觸發 body 的點擊事件
+                    e.stopPropagation(); 
                     const key = e.target.dataset.key;
                     const translation = vocabulary[key];
                     if (translation) {
@@ -405,37 +584,50 @@
                 });
             });
 
-            // 點擊頁面其他地方隱藏提示框
             document.body.addEventListener('click', () => {
                 tooltip.style.display = 'none';
             });
 
-            // --- 音訊播放邏輯 ---
+            // --- 音訊播放邏輯 (已修正) ---
             allPlayButtons.forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     const targetAudioId = button.dataset.audio;
                     const targetPlayer = document.getElementById(targetAudioId);
                     if (!targetPlayer) return;
 
-                    const isPlaying = !targetPlayer.paused;
-                    
-                    allPlayers.forEach(p => { p.pause(); });
-                    allPlayButtons.forEach(b => {
-                        if(b.querySelector('span')) b.querySelector('span').className = 'play-icon';
-                    });
+                    const isCurrentlyPlaying = !targetPlayer.paused;
 
-                    if (isPlaying) {
+                    if (!isCurrentlyPlaying) {
+                        allPlayers.forEach(p => {
+                            if (p !== targetPlayer) {
+                                p.pause();
+                                p.currentTime = 0;
+                            }
+                        });
+                    }
+
+                    if (isCurrentlyPlaying) {
                         targetPlayer.pause();
                     } else {
-                        targetPlayer.currentTime = 0;
-                        targetPlayer.play().catch(e => console.error("播放錯誤:", e));
-                        if(button.querySelector('span')) button.querySelector('span').className = 'pause-icon';
+                        targetPlayer.play().catch(err => {
+                            if (err.name !== 'AbortError') {
+                                console.error("播放錯誤:", err);
+                            }
+                        });
                     }
                 });
             });
 
             allPlayers.forEach(player => {
-                player.addEventListener('ended', () => {
+                player.addEventListener('play', () => {
+                    const btn = document.querySelector(`[data-audio="${player.id}"]`);
+                    if (btn && btn.querySelector('span')) {
+                        btn.querySelector('span').className = 'pause-icon';
+                    }
+                });
+
+                player.addEventListener('pause', () => { // This covers both pause and ended
                     const btn = document.querySelector(`[data-audio="${player.id}"]`);
                     if (btn && btn.querySelector('span')) {
                         btn.querySelector('span').className = 'play-icon';
